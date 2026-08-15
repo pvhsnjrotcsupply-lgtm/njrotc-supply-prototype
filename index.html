@@ -137,6 +137,12 @@ input {
             Enter Student ID Manually
         </button>
 
+        <button
+            class="secondary"
+            onclick="lookupIssuedItemsManual()">
+            Look Up Cadet Issued Items
+        </button>
+
     </div>
 
 
@@ -155,6 +161,12 @@ input {
 
         <button onclick="startItemScan()">
             Scan Item
+        </button>
+
+        <button
+            class="secondary"
+            onclick="lookupIssuedItems()">
+            View Issued Items
         </button>
 
         <button
@@ -189,6 +201,28 @@ input {
             class="secondary"
             onclick="resetApp()">
             Cancel
+        </button>
+
+    </div>
+
+
+    <!-- ISSUED ITEMS -->
+
+    <div id="issuedCard"
+         class="card hidden">
+
+        <h2>Issued Items</h2>
+
+        <div id="issuedStudentName"
+             class="student-name">
+        </div>
+
+        <div id="issuedItems"></div>
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+            Back
         </button>
 
     </div>
@@ -289,6 +323,11 @@ function showScanner(title) {
 
     document
         .getElementById("itemCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("issuedCard")
         .classList
         .add("hidden");
 
@@ -550,6 +589,117 @@ function issueItem() {
 
 
 
+function lookupIssuedItemsManual() {
+
+    const id =
+        prompt("Enter Student ID:");
+
+    if (!id) return;
+
+    lookupIssuedItemsForStudent(id);
+
+}
+
+
+
+function lookupIssuedItems() {
+
+    if (!currentStudent) return;
+
+    lookupIssuedItemsForStudent(
+        currentStudent.id
+    );
+
+}
+
+
+
+function lookupIssuedItemsForStudent(studentId) {
+
+    postData({
+
+        action: "lookupIssuedItems",
+
+        studentId: studentId
+
+    })
+
+    .then(result => {
+
+        if (!result.success) {
+
+            showError(result.message);
+
+            return;
+
+        }
+
+
+        currentStudent =
+            result.data.student;
+
+
+        document
+            .getElementById("studentCard")
+            .classList
+            .add("hidden");
+
+
+        document
+            .getElementById("issuedCard")
+            .classList
+            .remove("hidden");
+
+
+        document
+            .getElementById("issuedStudentName")
+            .innerText =
+                currentStudent.firstName +
+                " " +
+                currentStudent.lastName;
+
+
+        const container =
+            document.getElementById("issuedItems");
+
+
+        container.innerHTML = "";
+
+
+        if (result.data.items.length === 0) {
+
+            container.innerText =
+                "No items currently issued.";
+
+            return;
+
+        }
+
+
+        result.data.items.forEach(item => {
+
+            const div =
+                document.createElement("div");
+
+            div.className = "status";
+
+            div.innerText =
+                item.itemName +
+                "\nBarcode: " +
+                item.barcode +
+                "\nIssued: " +
+                new Date(item.date).toLocaleString();
+
+            container.appendChild(div);
+
+        });
+
+    });
+
+}
+
+
+
 function postData(data) {
 
     return fetch(
@@ -615,6 +765,11 @@ function resetApp() {
 
     document
         .getElementById("itemCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("issuedCard")
         .classList
         .add("hidden");
 
