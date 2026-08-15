@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>NJROTC Supply Prototype</title>
+
+<script src="https://unpkg.com/html5-qrcode"
+        type="text/javascript"></script>
+
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 500px;
+    margin: auto;
+}
+
+.header {
+    background: #111;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #222;
+    color: white;
+    font-size: 18px;
+}
+
+button.secondary {
+    background: #777;
+}
+
+button.success {
+    background: #087f23;
+}
+
+button.danger {
+    background: #a00000;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px;
+    font-size: 18px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.hidden {
+    display: none;
+}
+
+.student-name {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.item-name {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.status {
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 8px;
+    background: #eee;
+}
+
+#reader {
+    width: 100%;
+    margin-top: 15px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>PVHS NJROTC</h1>
+
+        <div>SUPPLY PROTOTYPE</div>
+
+    </div>
+
+
+    <!-- HOME -->
+
+    <div id="home" class="card">
+
+        <h2>Issue Item</h2>
+
+        <button onclick="startStudentScan()">
+            Scan Student ID
+        </button>
+
+        <button
+            class="secondary"
+            onclick="manualStudent()">
+            Enter Student ID Manually
+        </button>
+
+    </div>
+
+
+    <!-- STUDENT -->
+
+    <div id="studentCard"
+         class="card hidden">
+
+        <h2>Student</h2>
+
+        <div id="studentName"
+             class="student-name">
+        </div>
+
+        <p id="studentDetails"></p>
+
+        <button onclick="startItemScan()">
+            Scan Item
+        </button>
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+            Cancel
+        </button>
+
+    </div>
+
+
+    <!-- ITEM -->
+
+    <div id="itemCard"
+         class="card hidden">
+
+        <h2>Item</h2>
+
+        <div id="itemName"
+             class="item-name">
+        </div>
+
+        <p id="itemDetails"></p>
+
+        <button
+            class="success"
+            onclick="issueItem()">
+            Confirm Issue
+        </button>
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+            Cancel
+        </button>
+
+    </div>
+
+
+    <!-- SCANNER -->
+
+    <div id="scannerCard"
+         class="card hidden">
+
+        <h2 id="scannerTitle">
+            Scan
+        </h2>
+
+        <div id="reader"></div>
+
+        <button
+            class="secondary"
+            onclick="stopScanner()">
+            Cancel Scan
+        </button>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div id="statusCard"
+         class="card hidden">
+
+        <h2 id="statusTitle"></h2>
+
+        <div id="statusMessage"
+             class="status">
+        </div>
+
+        <button onclick="resetApp()">
+            Issue Another Item
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+const APPS_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbw11OfZGhx0GB6GSvyod9G5MKR3ymAPtUW_6MJMcqbvnrSofMPRzXxfOWazhDPoUorm/exec";
+
+
+let currentStudent = null;
+
+let currentItem = null;
+
+let scanner = null;
+
+let scannerMode = null;
+
+
+
+function startStudentScan() {
+
+    scannerMode = "student";
+
+    showScanner(
+        "Scan Student ID"
+    );
+
+}
+
+
+
+function startItemScan() {
+
+    scannerMode = "item";
+
+    showScanner(
+        "Scan Item Barcode"
+    );
+
+}
+
+
+
+function showScanner(title) {
+
+    document
+        .getElementById("home")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("studentCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("itemCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("scannerCard")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("scannerTitle")
+        .innerText = title;
+
+
+    scanner =
+        new Html5Qrcode("reader");
+
+
+    scanner.start(
+
+        { facingMode: "environment" },
+
+        {
+            fps: 10,
+
+            qrbox: {
+                width: 280,
+                height: 120
+            }
+
+        },
+
+        barcode => {
+
+            stopScanner();
+
+            handleBarcode(barcode);
+
+        },
+
+        error => {
+
+            // Ignore continuous scanning errors.
+
+        }
+
+    ).catch(error => {
+
+        alert(
+            "Camera could not start.\n\n" +
+            error
+        );
+
+    });
+
+}
+
+
+
+function stopScanner() {
+
+    if (scanner) {
+
+        scanner.stop()
+            .then(() => {
+
+                scanner.clear();
+
+            })
+            .catch(() => {});
+
+        scanner = null;
+
+    }
+
+    document
+        .getElementById("scannerCard")
+        .classList
+        .add("hidden");
+
+}
+
+
+
+function handleBarcode(barcode) {
+
+    if (scannerMode === "student") {
+
+        lookupStudent(barcode);
+
+    }
+
+    else if (scannerMode === "item") {
+
+        lookupItem(barcode);
+
+    }
+
+}
+
+
+
+function lookupStudent(studentId) {
+
+    postData({
+
+        action: "lookupStudent",
+
+        studentId: studentId
+
+    })
+
+    .then(result => {
+
+        if (!result.success) {
+
+            showError(result.message);
+
+            return;
+
+        }
+
+
+        currentStudent =
+            result.data.student;
+
+
+        document
+            .getElementById("studentName")
+            .innerText =
+                currentStudent.firstName +
+                " " +
+                currentStudent.lastName;
+
+
+        document
+            .getElementById("studentDetails")
+            .innerText =
+                "ID: " +
+                currentStudent.id +
+                " | Grade: " +
+                currentStudent.grade +
+                " | " +
+                currentStudent.company +
+                " Company | " +
+                currentStudent.platoon +
+                " Platoon";
+
+
+        document
+            .getElementById("studentCard")
+            .classList
+            .remove("hidden");
+
+    });
+
+}
+
+
+
+function lookupItem(itemBarcode) {
+
+    postData({
+
+        action: "lookupItem",
+
+        studentId: currentStudent.id,
+
+        itemBarcode: itemBarcode
+
+    })
+
+    .then(result => {
+
+        if (!result.success) {
+
+            showError(result.message);
+
+            return;
+
+        }
+
+
+        currentItem =
+            result.data.item;
+
+
+        document
+            .getElementById("itemName")
+            .innerText =
+                currentItem.itemName +
+                " — " +
+                currentItem.size;
+
+
+        document
+            .getElementById("itemDetails")
+            .innerText =
+                "Item Code: " +
+                currentItem.itemCode +
+                " | Category: " +
+                currentItem.category;
+
+
+        document
+            .getElementById("itemCard")
+            .classList
+            .remove("hidden");
+
+    });
+
+}
+
+
+
+function issueItem() {
+
+    postData({
+
+        action: "issue",
+
+        studentId: currentStudent.id,
+
+        itemBarcode: currentItem.barcode,
+
+        clerk: "Prototype Clerk"
+
+    })
+
+    .then(result => {
+
+        document
+            .getElementById("itemCard")
+            .classList
+            .add("hidden");
+
+
+        document
+            .getElementById("statusCard")
+            .classList
+            .remove("hidden");
+
+
+        document
+            .getElementById("statusTitle")
+            .innerText =
+                result.success
+                ? "✓ Issue Successful"
+                : "Issue Failed";
+
+
+        document
+            .getElementById("statusMessage")
+            .innerText =
+                result.message;
+
+    });
+
+}
+
+
+
+function postData(data) {
+
+    return fetch(
+        APPS_SCRIPT_URL,
+        {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                    "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify(data)
+
+        }
+    )
+    .then(response => response.json());
+
+}
+
+
+
+function manualStudent() {
+
+    const id =
+        prompt("Enter Student ID:");
+
+    if (!id) return;
+
+    lookupStudent(id);
+
+}
+
+
+
+function showError(message) {
+
+    alert(message);
+
+}
+
+
+
+function resetApp() {
+
+    currentStudent = null;
+
+    currentItem = null;
+
+    scannerMode = null;
+
+
+    document
+        .getElementById("home")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("studentCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("itemCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("scannerCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("statusCard")
+        .classList
+        .add("hidden");
+
+}
+
+
+</script>
+
+</body>
+
+</html>
