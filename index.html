@@ -9,99 +9,371 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>NJROTC Supply Prototype</title>
+<title>PVHS NJROTC Supply</title>
 
-<script src="https://unpkg.com/html5-qrcode"
-        type="text/javascript"></script>
+<script
+src="https://unpkg.com/html5-qrcode"
+type="text/javascript">
+</script>
+
 
 <style>
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f2f2f2;
-    margin: 0;
-    padding: 20px;
+* {
+    box-sizing: border-box;
 }
+
+
+body {
+
+    margin: 0;
+
+    padding: 15px;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f1f3f5;
+
+    color: #222;
+
+}
+
 
 .container {
-    max-width: 500px;
+
+    max-width: 520px;
+
     margin: auto;
+
 }
+
 
 .header {
+
     background: #111;
+
     color: white;
-    padding: 20px;
+
+    padding: 22px;
+
     text-align: center;
-    border-radius: 12px;
+
+    border-radius: 14px;
+
+    margin-bottom: 15px;
+
 }
+
+
+.header h1 {
+
+    margin: 0 0 5px 0;
+
+    font-size: 25px;
+
+}
+
+
+.header div {
+
+    font-size: 14px;
+
+    opacity: 0.8;
+
+}
+
 
 .card {
+
     background: white;
+
     padding: 20px;
-    margin-top: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+    margin-bottom: 15px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.08);
+
 }
 
-button {
-    width: 100%;
-    padding: 16px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 8px;
-    background: #222;
-    color: white;
-    font-size: 18px;
-}
-
-button.secondary {
-    background: #777;
-}
-
-button.success {
-    background: #087f23;
-}
-
-button.danger {
-    background: #a00000;
-}
-
-input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 14px;
-    font-size: 18px;
-    margin-top: 8px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
 
 .hidden {
-    display: none;
+
+    display: none !important;
+
 }
+
+
+h2 {
+
+    margin-top: 0;
+
+}
+
+
+button {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #222;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+button.secondary {
+
+    background: #777;
+
+}
+
+
+button.success {
+
+    background: #087f23;
+
+}
+
+
+button.warning {
+
+    background: #b06b00;
+
+}
+
+
+button.danger {
+
+    background: #9c0000;
+
+}
+
+
+input,
+select {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 7px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 17px;
+
+}
+
+
+label {
+
+    display: block;
+
+    margin-top: 12px;
+
+    font-weight: bold;
+
+}
+
 
 .student-name {
+
     font-size: 26px;
+
     font-weight: bold;
+
+    margin-bottom: 10px;
+
 }
+
 
 .item-name {
+
     font-size: 22px;
+
     font-weight: bold;
+
+    margin-bottom: 10px;
+
 }
+
 
 .status {
+
     padding: 15px;
+
     margin-top: 15px;
-    border-radius: 8px;
+
+    border-radius: 9px;
+
     background: #eee;
+
+    line-height: 1.5;
+
 }
 
-#reader {
-    width: 100%;
-    margin-top: 15px;
+
+.status.success {
+
+    background: #dff4e4;
+
+    color: #155724;
+
 }
+
+
+.status.error {
+
+    background: #f8d7da;
+
+    color: #721c24;
+
+}
+
+
+.status.warning {
+
+    background: #fff3cd;
+
+    color: #856404;
+
+}
+
+
+.menu-button {
+
+    padding: 20px;
+
+    font-size: 18px;
+
+}
+
+
+.scan-button {
+
+    font-size: 18px;
+
+}
+
+
+.back-button {
+
+    margin-top: 20px;
+
+}
+
+
+#reader {
+
+    width: 100%;
+
+    margin-top: 15px;
+
+}
+
+
+.item-row {
+
+    padding: 13px;
+
+    border-bottom: 1px solid #ddd;
+
+}
+
+
+.item-row:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.item-row strong {
+
+    display: block;
+
+    font-size: 17px;
+
+}
+
+
+.history-row {
+
+    padding: 12px;
+
+    border-bottom: 1px solid #ddd;
+
+    font-size: 14px;
+
+}
+
+
+.history-row:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.action-ISSUE {
+
+    color: #087f23;
+
+    font-weight: bold;
+
+}
+
+
+.action-RETURN {
+
+    color: #9c0000;
+
+    font-weight: bold;
+
+}
+
+
+.small {
+
+    font-size: 13px;
+
+    color: #666;
+
+}
+
+
+.loading {
+
+    text-align: center;
+
+    padding: 20px;
+
+    font-size: 18px;
+
+}
+
 
 </style>
 
@@ -110,146 +382,771 @@ input {
 
 <body>
 
+
 <div class="container">
+
+
+    <!-- HEADER -->
 
     <div class="header">
 
         <h1>PVHS NJROTC</h1>
 
-        <div>SUPPLY PROTOTYPE</div>
+        <div>SUPPLY MANAGEMENT PROTOTYPE — v0.2</div>
 
     </div>
 
 
-    <!-- HOME -->
 
-    <div id="home" class="card">
+    <!-- =========================
+         MAIN MENU
+         ========================= -->
 
-        <h2>Issue Item</h2>
+    <div id="home"
+         class="card">
 
-        <button onclick="startStudentScan()">
-            Scan Student ID
-        </button>
+        <h2>Supply Operations</h2>
+
 
         <button
-            class="secondary"
-            onclick="manualStudent()">
-            Enter Student ID Manually
+            class="menu-button"
+            onclick="startIssue()">
+
+            📦 ISSUE ITEM
+
         </button>
+
+
+        <button
+            class="menu-button"
+            onclick="startReturn()">
+
+            ↩️ RETURN ITEM
+
+        </button>
+
+
+        <button
+            class="menu-button"
+            onclick="startExchange()">
+
+            🔄 EXCHANGE ITEM
+
+        </button>
+
+
+        <button
+            class="menu-button"
+            onclick="startViewCadet()">
+
+            👤 VIEW CADET
+
+        </button>
+
+
+        <label for="clerkName">
+
+            Supply Clerk
+
+        </label>
+
+
+        <input
+            id="clerkName"
+            type="text"
+            placeholder="Enter clerk name">
+
+
+        <p class="small">
+
+            Your clerk name will be attached
+            to transactions created during
+            this session.
+
+        </p>
 
     </div>
 
 
-    <!-- STUDENT -->
+
+    <!-- =========================
+         STUDENT CARD
+         ========================= -->
 
     <div id="studentCard"
          class="card hidden">
 
         <h2>Student</h2>
 
+
         <div id="studentName"
              class="student-name">
         </div>
 
-        <p id="studentDetails"></p>
 
-        <button onclick="startItemScan()">
-            Scan Item
+        <div id="studentDetails">
+        </div>
+
+
+        <button
+            onclick="startItemScan()">
+
+            📷 Scan Item Barcode
+
         </button>
+
+
+        <button
+            class="secondary"
+            onclick="manualItem()">
+
+            ⌨️ Enter Item Barcode
+
+        </button>
+
 
         <button
             class="secondary"
             onclick="resetApp()">
+
             Cancel
+
         </button>
 
     </div>
 
 
-    <!-- ITEM -->
+
+    <!-- =========================
+         RETURN STUDENT CARD
+         ========================= -->
+
+    <div id="returnStudentCard"
+         class="card hidden">
+
+        <h2>Return Item</h2>
+
+
+        <div id="returnStudentName"
+             class="student-name">
+        </div>
+
+
+        <div id="returnStudentDetails">
+        </div>
+
+
+        <button
+            onclick="startItemScan()">
+
+            📷 Scan Item to Return
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="manualItem()">
+
+            ⌨️ Enter Item Barcode
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         EXCHANGE CARD
+         ========================= -->
+
+    <div id="exchangeStudentCard"
+         class="card hidden">
+
+        <h2>Exchange Item</h2>
+
+
+        <div id="exchangeStudentName"
+             class="student-name">
+        </div>
+
+
+        <div id="exchangeStudentDetails">
+        </div>
+
+
+        <p>
+
+            First scan or enter the item
+            being returned.
+
+        </p>
+
+
+        <button
+            onclick="startItemScan()">
+
+            📷 Scan Old Item
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="manualItem()">
+
+            ⌨️ Enter Old Item Barcode
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         ITEM CARD
+         ========================= -->
 
     <div id="itemCard"
          class="card hidden">
 
-        <h2>Item</h2>
+        <h2 id="itemActionTitle">
+            Item
+        </h2>
+
 
         <div id="itemName"
              class="item-name">
         </div>
 
-        <p id="itemDetails"></p>
+
+        <div id="itemDetails">
+        </div>
+
 
         <button
             class="success"
-            onclick="issueItem()">
-            Confirm Issue
+            onclick="confirmPrimaryAction()">
+
+            Confirm
+
         </button>
+
 
         <button
             class="secondary"
             onclick="resetApp()">
+
             Cancel
+
         </button>
 
     </div>
 
 
-    <!-- SCANNER -->
+
+    <!-- =========================
+         EXCHANGE OLD ITEM CARD
+         ========================= -->
+
+    <div id="exchangeOldItemCard"
+         class="card hidden">
+
+        <h2>Old Item</h2>
+
+
+        <div id="oldItemName"
+             class="item-name">
+        </div>
+
+
+        <div id="oldItemDetails">
+        </div>
+
+
+        <p>
+
+            Now scan the replacement item.
+
+        </p>
+
+
+        <button
+            onclick="startItemScan()">
+
+            📷 Scan New Item
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="manualItem()">
+
+            ⌨️ Enter New Item Barcode
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         EXCHANGE CONFIRMATION
+         ========================= -->
+
+    <div id="exchangeConfirmCard"
+         class="card hidden">
+
+        <h2>Confirm Exchange</h2>
+
+
+        <p>
+
+            <strong>Returning:</strong>
+
+        </p>
+
+
+        <div id="exchangeOldDisplay"
+             class="item-name">
+        </div>
+
+
+        <hr>
+
+
+        <p>
+
+            <strong>Issuing:</strong>
+
+        </p>
+
+
+        <div id="exchangeNewDisplay"
+             class="item-name">
+        </div>
+
+
+        <button
+            class="success"
+            onclick="confirmExchange()">
+
+            ✓ Confirm Exchange
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         CADET VIEW
+         ========================= -->
+
+    <div id="cadetCard"
+         class="card hidden">
+
+        <h2>Cadet Information</h2>
+
+
+        <div id="cadetName"
+             class="student-name">
+        </div>
+
+
+        <div id="cadetDetails">
+        </div>
+
+
+        <hr>
+
+
+        <h3>Currently Issued</h3>
+
+
+        <div id="currentItems">
+        </div>
+
+
+        <hr>
+
+
+        <h3>Transaction History</h3>
+
+
+        <div id="history">
+        </div>
+
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+
+            Back to Menu
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         SCANNER
+         ========================= -->
 
     <div id="scannerCard"
          class="card hidden">
 
         <h2 id="scannerTitle">
+
             Scan
+
         </h2>
 
+
         <div id="reader"></div>
+
 
         <button
             class="secondary"
             onclick="stopScanner()">
+
             Cancel Scan
+
         </button>
 
     </div>
 
 
-    <!-- STATUS -->
+
+    <!-- =========================
+         MANUAL ENTRY
+         ========================= -->
+
+    <div id="manualCard"
+         class="card hidden">
+
+        <h2 id="manualTitle">
+
+            Manual Entry
+
+        </h2>
+
+
+        <input
+            id="manualInput"
+            type="text"
+            inputmode="numeric"
+            autocomplete="off"
+            placeholder="Enter barcode">
+
+
+        <button
+            class="success"
+            onclick="submitManualEntry()">
+
+            Look Up
+
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+
+
+    <!-- =========================
+         STATUS
+         ========================= -->
 
     <div id="statusCard"
          class="card hidden">
 
-        <h2 id="statusTitle"></h2>
+        <h2 id="statusTitle">
+        </h2>
+
 
         <div id="statusMessage"
              class="status">
         </div>
 
-        <button onclick="resetApp()">
-            Issue Another Item
+
+        <button
+            onclick="resetApp()">
+
+            Return to Menu
+
         </button>
 
     </div>
 
+
 </div>
+
 
 
 <script>
 
 
+/* =========================================================
+   CONFIGURATION
+   ========================================================= */
+
 const APPS_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbw11OfZGhx0GB6GSvyod9G5MKR3ymAPtUW_6MJMcqbvnrSofMPRzXxfOWazhDPoUorm/exec";
 
 
+/* =========================================================
+   STATE
+   ========================================================= */
+
 let currentStudent = null;
 
 let currentItem = null;
+
+let oldItem = null;
+
+let newItem = null;
+
+let currentMode = null;
 
 let scanner = null;
 
 let scannerMode = null;
 
 
+/* =========================================================
+   INITIALIZATION
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadClerk();
+
+    }
+);
+
+
+function loadClerk() {
+
+    const saved =
+        localStorage.getItem(
+            "njrotc_supply_clerk"
+        );
+
+    if (saved) {
+
+        document
+            .getElementById("clerkName")
+            .value = saved;
+
+    }
+
+}
+
+
+function saveClerk() {
+
+    const clerk =
+        document
+            .getElementById("clerkName")
+            .value
+            .trim();
+
+
+    if (clerk) {
+
+        localStorage.setItem(
+            "njrotc_supply_clerk",
+            clerk
+        );
+
+    }
+
+
+    return clerk || "Unknown Clerk";
+
+}
+
+
+/* =========================================================
+   MODES
+   ========================================================= */
+
+function startIssue() {
+
+    currentMode = "issue";
+
+    startStudentInput();
+
+}
+
+
+function startReturn() {
+
+    currentMode = "return";
+
+    startStudentInput();
+
+}
+
+
+function startExchange() {
+
+    currentMode = "exchange";
+
+    startStudentInput();
+
+}
+
+
+function startViewCadet() {
+
+    currentMode = "view";
+
+    startStudentInput();
+
+}
+
+
+/* =========================================================
+   STUDENT INPUT
+   ========================================================= */
+
+function startStudentInput() {
+
+    hideAllCards();
+
+
+    showStudentInput();
+
+}
+
+
+function showStudentInput() {
+
+    const card =
+        document.getElementById(
+            "home"
+        );
+
+
+    /*
+     * Use a temporary student input screen.
+     */
+
+    const html = `
+
+        <h2>
+            ${getModeTitle()}
+        </h2>
+
+        <p>
+            Scan the student's school ID
+            or enter the ID manually.
+        </p>
+
+        <button
+            onclick="startStudentScan()">
+
+            📷 Scan Student ID
+
+        </button>
+
+        <button
+            class="secondary"
+            onclick="manualStudent()">
+
+            ⌨️ Enter Student ID
+
+        </button>
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+
+            Cancel
+
+        </button>
+
+    `;
+
+
+    card.innerHTML = html;
+
+    card.classList.remove("hidden");
+
+}
+
+
+function getModeTitle() {
+
+    if (currentMode === "issue")
+        return "Issue Item";
+
+    if (currentMode === "return")
+        return "Return Item";
+
+    if (currentMode === "exchange")
+        return "Exchange Item";
+
+    if (currentMode === "view")
+        return "View Cadet";
+
+    return "Supply";
+
+}
+
+
+/* =========================================================
+   STUDENT SCANNING
+   ========================================================= */
 
 function startStudentScan() {
 
@@ -262,135 +1159,45 @@ function startStudentScan() {
 }
 
 
+function manualStudent() {
 
-function startItemScan() {
-
-    scannerMode = "item";
-
-    showScanner(
-        "Scan Item Barcode"
-    );
-
-}
-
-
-
-function showScanner(title) {
+    hideAllCards();
 
     document
-        .getElementById("home")
-        .classList
-        .add("hidden");
-
-    document
-        .getElementById("studentCard")
-        .classList
-        .add("hidden");
-
-    document
-        .getElementById("itemCard")
-        .classList
-        .add("hidden");
-
-    document
-        .getElementById("scannerCard")
+        .getElementById("manualCard")
         .classList
         .remove("hidden");
 
+
     document
-        .getElementById("scannerTitle")
-        .innerText = title;
+        .getElementById("manualTitle")
+        .innerText =
+            "Enter Student ID";
 
 
-    scanner =
-        new Html5Qrcode("reader");
-
-
-    scanner.start(
-
-        { facingMode: "environment" },
-
-        {
-            fps: 10,
-
-            qrbox: {
-                width: 280,
-                height: 120
-            }
-
-        },
-
-        barcode => {
-
-            stopScanner();
-
-            handleBarcode(barcode);
-
-        },
-
-        error => {
-
-            // Ignore continuous scanning errors.
-
-        }
-
-    ).catch(error => {
-
-        alert(
-            "Camera could not start.\n\n" +
-            error
+    const input =
+        document.getElementById(
+            "manualInput"
         );
 
-    });
+
+    input.value = "";
+
+    input.placeholder =
+        "Enter Student ID";
+
+
+    input.focus();
 
 }
-
-
-
-function stopScanner() {
-
-    if (scanner) {
-
-        scanner.stop()
-            .then(() => {
-
-                scanner.clear();
-
-            })
-            .catch(() => {});
-
-        scanner = null;
-
-    }
-
-    document
-        .getElementById("scannerCard")
-        .classList
-        .add("hidden");
-
-}
-
-
-
-function handleBarcode(barcode) {
-
-    if (scannerMode === "student") {
-
-        lookupStudent(barcode);
-
-    }
-
-    else if (scannerMode === "item") {
-
-        lookupItem(barcode);
-
-    }
-
-}
-
 
 
 function lookupStudent(studentId) {
+
+    showLoading(
+        "Finding student..."
+    );
+
 
     postData({
 
@@ -400,11 +1207,13 @@ function lookupStudent(studentId) {
 
     })
 
-    .then(result => {
+    .then(function(result) {
 
         if (!result.success) {
 
-            showError(result.message);
+            showError(
+                result.message
+            );
 
             return;
 
@@ -415,223 +1224,1637 @@ function lookupStudent(studentId) {
             result.data.student;
 
 
-        document
-            .getElementById("studentName")
-            .innerText =
-                currentStudent.firstName +
-                " " +
-                currentStudent.lastName;
+        if (currentMode === "view") {
 
-
-        document
-            .getElementById("studentDetails")
-            .innerText =
-                "ID: " +
-                currentStudent.id +
-                " | Grade: " +
-                currentStudent.grade +
-                " | " +
-                currentStudent.company +
-                " Company | " +
-                currentStudent.platoon +
-                " Platoon";
-
-
-        document
-            .getElementById("studentCard")
-            .classList
-            .remove("hidden");
-
-    });
-
-}
-
-
-
-function lookupItem(itemBarcode) {
-
-    postData({
-
-        action: "lookupItem",
-
-        studentId: currentStudent.id,
-
-        itemBarcode: itemBarcode
-
-    })
-
-    .then(result => {
-
-        if (!result.success) {
-
-            showError(result.message);
+            loadCadet();
 
             return;
 
         }
 
 
-        currentItem =
-            result.data.item;
+        showStudentConfirmation();
 
+    })
 
-        document
-            .getElementById("itemName")
-            .innerText =
-                currentItem.itemName +
-                " — " +
-                currentItem.size;
+    .catch(function(error) {
 
+        showError(
+            "Could not contact Supply server."
+        );
 
-        document
-            .getElementById("itemDetails")
-            .innerText =
-                "Item Code: " +
-                currentItem.itemCode +
-                " | Category: " +
-                currentItem.category;
-
-
-        document
-            .getElementById("itemCard")
-            .classList
-            .remove("hidden");
+        console.error(error);
 
     });
 
 }
 
 
+/* =========================================================
+   STUDENT CONFIRMATION
+   ========================================================= */
 
-function issueItem() {
+function showStudentConfirmation() {
+
+    hideAllCards();
+
+
+    let cardId =
+        "studentCard";
+
+
+    if (currentMode === "return") {
+
+        cardId =
+            "returnStudentCard";
+
+    }
+
+    else if (
+        currentMode === "exchange"
+    ) {
+
+        cardId =
+            "exchangeStudentCard";
+
+    }
+
+
+    const card =
+        document.getElementById(
+            cardId
+        );
+
+
+    const name =
+        currentStudent.firstName +
+        " " +
+        currentStudent.lastName;
+
+
+    if (currentMode === "issue") {
+
+        document
+            .getElementById(
+                "studentName"
+            )
+            .innerText = name;
+
+
+        document
+            .getElementById(
+                "studentDetails"
+            )
+            .innerText =
+                formatStudentDetails();
+
+    }
+
+
+    if (currentMode === "return") {
+
+        document
+            .getElementById(
+                "returnStudentName"
+            )
+            .innerText = name;
+
+
+        document
+            .getElementById(
+                "returnStudentDetails"
+            )
+            .innerText =
+                formatStudentDetails();
+
+    }
+
+
+    if (currentMode === "exchange") {
+
+        document
+            .getElementById(
+                "exchangeStudentName"
+            )
+            .innerText = name;
+
+
+        document
+            .getElementById(
+                "exchangeStudentDetails"
+            )
+            .innerText =
+                formatStudentDetails();
+
+    }
+
+
+    card.classList.remove("hidden");
+
+}
+
+
+function formatStudentDetails() {
+
+    return (
+
+        "ID: " +
+        currentStudent.id +
+
+        " | Grade: " +
+        currentStudent.grade +
+
+        " | " +
+        currentStudent.company +
+
+        " Company | " +
+
+        currentStudent.platoon +
+
+        " Platoon"
+
+    );
+
+}
+
+
+/* =========================================================
+   ITEM SCANNING
+   ========================================================= */
+
+function startItemScan() {
+
+    scannerMode = "item";
+
+    showScanner(
+        getItemScanTitle()
+    );
+
+}
+
+
+function getItemScanTitle() {
+
+    if (currentMode === "exchange" &&
+        oldItem) {
+
+        return "Scan New Item";
+
+    }
+
+
+    if (currentMode === "return") {
+
+        return "Scan Item to Return";
+
+    }
+
+
+    return "Scan Item Barcode";
+
+}
+
+
+function manualItem() {
+
+    hideAllCards();
+
+
+    document
+        .getElementById(
+            "manualCard"
+        )
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById(
+            "manualTitle"
+        )
+        .innerText =
+            getItemScanTitle();
+
+
+    const input =
+        document.getElementById(
+            "manualInput"
+        );
+
+
+    input.value = "";
+
+    input.placeholder =
+        "Enter Item Barcode";
+
+
+    input.focus();
+
+}
+
+
+/* =========================================================
+   ITEM LOOKUP
+   ========================================================= */
+
+function lookupItem(itemBarcode) {
+
+    showLoading(
+        "Finding item..."
+    );
+
+
+    postData({
+
+        action: "lookupItem",
+
+        studentId:
+            currentStudent.id,
+
+        itemBarcode:
+            itemBarcode
+
+    })
+
+    .then(function(result) {
+
+        if (!result.success) {
+
+            showError(
+                result.message
+            );
+
+            return;
+
+        }
+
+
+        const item =
+            result.data.item;
+
+
+        /*
+         * EXCHANGE
+         */
+
+        if (
+            currentMode === "exchange" &&
+            oldItem
+        ) {
+
+            newItem = item;
+
+            showExchangeConfirmation();
+
+            return;
+
+        }
+
+
+        /*
+         * EXCHANGE FIRST ITEM
+         */
+
+        if (
+            currentMode === "exchange"
+        ) {
+
+            oldItem = item;
+
+            showOldItem();
+
+            return;
+
+        }
+
+
+        /*
+         * NORMAL ISSUE / RETURN
+         */
+
+        currentItem = item;
+
+        showItemConfirmation();
+
+    })
+
+    .catch(function(error) {
+
+        showError(
+            "Could not contact Supply server."
+        );
+
+        console.error(error);
+
+    });
+
+}
+
+
+/* =========================================================
+   ITEM CONFIRMATION
+   ========================================================= */
+
+function showItemConfirmation() {
+
+    hideAllCards();
+
+
+    const card =
+        document.getElementById(
+            "itemCard"
+        );
+
+
+    let title = "Item";
+
+
+    if (currentMode === "issue") {
+
+        title =
+            "Confirm Issue";
+
+    }
+
+    else if (
+        currentMode === "return"
+    ) {
+
+        title =
+            "Confirm Return";
+
+    }
+
+
+    document
+        .getElementById(
+            "itemActionTitle"
+        )
+        .innerText = title;
+
+
+    document
+        .getElementById(
+            "itemName"
+        )
+        .innerText =
+            currentItem.itemName +
+            " — " +
+            currentItem.size;
+
+
+    document
+        .getElementById(
+            "itemDetails"
+        )
+        .innerText =
+            "Item Code: " +
+            currentItem.itemCode +
+            " | Category: " +
+            currentItem.category;
+
+
+    card.classList.remove("hidden");
+
+}
+
+
+/* =========================================================
+   EXCHANGE
+   ========================================================= */
+
+function showOldItem() {
+
+    hideAllCards();
+
+
+    document
+        .getElementById(
+            "oldItemName"
+        )
+        .innerText =
+            oldItem.itemName +
+            " — " +
+            oldItem.size;
+
+
+    document
+        .getElementById(
+            "oldItemDetails"
+        )
+        .innerText =
+            "Item Code: " +
+            oldItem.itemCode;
+
+
+    document
+        .getElementById(
+            "exchangeOldItemCard"
+        )
+        .classList
+        .remove("hidden");
+
+}
+
+
+function showExchangeConfirmation() {
+
+    hideAllCards();
+
+
+    document
+        .getElementById(
+            "exchangeOldDisplay"
+        )
+        .innerText =
+            oldItem.itemName +
+            " — " +
+            oldItem.size;
+
+
+    document
+        .getElementById(
+            "exchangeNewDisplay"
+        )
+        .innerText =
+            newItem.itemName +
+            " — " +
+            newItem.size;
+
+
+    document
+        .getElementById(
+            "exchangeConfirmCard"
+        )
+        .classList
+        .remove("hidden");
+
+}
+
+
+/* =========================================================
+   CONFIRM PRIMARY ACTION
+   ========================================================= */
+
+function confirmPrimaryAction() {
+
+    if (currentMode === "issue") {
+
+        issueItem(false);
+
+        return;
+
+    }
+
+
+    if (currentMode === "return") {
+
+        returnItem(false);
+
+        return;
+
+    }
+
+}
+
+
+/* =========================================================
+   ISSUE
+   ========================================================= */
+
+function issueItem(force) {
+
+    showLoading(
+        "Processing issue..."
+    );
+
 
     postData({
 
         action: "issue",
 
-        studentId: currentStudent.id,
+        studentId:
+            currentStudent.id,
 
-        itemBarcode: currentItem.barcode,
+        itemBarcode:
+            currentItem.barcode,
 
-        clerk: "Prototype Clerk"
+        clerk:
+            saveClerk(),
+
+        force:
+            force === true
 
     })
 
-    .then(result => {
+    .then(function(result) {
 
-        document
-            .getElementById("itemCard")
-            .classList
-            .add("hidden");
+        if (
+            !result.success &&
+            result.data &&
+            result.data.requiresConfirmation
+        ) {
 
+            showDuplicateWarning(
+                result.message,
+                function() {
+                    issueItem(true);
+                }
+            );
 
-        document
-            .getElementById("statusCard")
-            .classList
-            .remove("hidden");
+            return;
 
-
-        document
-            .getElementById("statusTitle")
-            .innerText =
-                result.success
-                ? "✓ Issue Successful"
-                : "Issue Failed";
+        }
 
 
-        document
-            .getElementById("statusMessage")
-            .innerText =
-                result.message;
+        if (!result.success) {
+
+            showError(
+                result.message
+            );
+
+            return;
+
+        }
+
+
+        showSuccess(
+
+            "✓ Item Issued",
+
+            result.message +
+
+            "<br><br>" +
+
+            "<strong>" +
+            result.data.item.itemName +
+            " — " +
+            result.data.item.size +
+            "</strong>" +
+
+            "<br><br>" +
+
+            "Transaction: " +
+            result.data.transactionId
+
+        );
+
+    })
+
+    .catch(function(error) {
+
+        showError(
+            "Issue failed."
+        );
+
+        console.error(error);
 
     });
 
 }
 
 
+/* =========================================================
+   RETURN
+   ========================================================= */
 
-function postData(data) {
+function returnItem(force) {
 
-    return fetch(
-        APPS_SCRIPT_URL,
-        {
+    showLoading(
+        "Processing return..."
+    );
 
-            method: "POST",
 
-            headers: {
-                "Content-Type":
-                    "text/plain;charset=utf-8"
-            },
+    postData({
 
-            body: JSON.stringify(data)
+        action: "return",
+
+        studentId:
+            currentStudent.id,
+
+        itemBarcode:
+            currentItem.barcode,
+
+        clerk:
+            saveClerk(),
+
+        force:
+            force === true
+
+    })
+
+    .then(function(result) {
+
+        if (
+            !result.success &&
+            result.data &&
+            result.data.requiresConfirmation
+        ) {
+
+            showReturnWarning(
+                result.message,
+                function() {
+                    returnItem(true);
+                }
+            );
+
+            return;
 
         }
+
+
+        if (!result.success) {
+
+            showError(
+                result.message
+            );
+
+            return;
+
+        }
+
+
+        showSuccess(
+
+            "✓ Item Returned",
+
+            result.message +
+
+            "<br><br>" +
+
+            "<strong>" +
+            result.data.item.itemName +
+            " — " +
+            result.data.item.size +
+            "</strong>" +
+
+            "<br><br>" +
+
+            "Transaction: " +
+            result.data.transactionId
+
+        );
+
+    })
+
+    .catch(function(error) {
+
+        showError(
+            "Return failed."
+        );
+
+        console.error(error);
+
+    });
+
+}
+
+
+/* =========================================================
+   EXCHANGE CONFIRMATION
+   ========================================================= */
+
+function confirmExchange() {
+
+    exchangeItems(false);
+
+}
+
+
+function exchangeItems(force) {
+
+    showLoading(
+        "Processing exchange..."
+    );
+
+
+    postData({
+
+        action: "exchange",
+
+        studentId:
+            currentStudent.id,
+
+        oldItemBarcode:
+            oldItem.barcode,
+
+        newItemBarcode:
+            newItem.barcode,
+
+        clerk:
+            saveClerk(),
+
+        force:
+            force === true
+
+    })
+
+    .then(function(result) {
+
+        if (
+            !result.success &&
+            result.data &&
+            result.data.requiresConfirmation
+        ) {
+
+            showDuplicateWarning(
+                result.message,
+                function() {
+                    exchangeItems(true);
+                }
+            );
+
+            return;
+
+        }
+
+
+        if (!result.success) {
+
+            showError(
+                result.message
+            );
+
+            return;
+
+        }
+
+
+        showSuccess(
+
+            "✓ Exchange Complete",
+
+            "Returned:<br>" +
+
+            "<strong>" +
+            result.data.oldItem.itemName +
+            " — " +
+            result.data.oldItem.size +
+            "</strong>" +
+
+            "<br><br>" +
+
+            "Issued:<br>" +
+
+            "<strong>" +
+            result.data.newItem.itemName +
+            " — " +
+            result.data.newItem.size +
+            "</strong>" +
+
+            "<br><br>" +
+
+            "Return Transaction: " +
+            result.data.returnTransactionId +
+
+            "<br>" +
+
+            "Issue Transaction: " +
+            result.data.issueTransactionId
+
+        );
+
+    })
+
+    .catch(function(error) {
+
+        showError(
+            "Exchange failed."
+        );
+
+        console.error(error);
+
+    });
+
+}
+
+
+/* =========================================================
+   VIEW CADET
+   ========================================================= */
+
+function loadCadet() {
+
+    showLoading(
+        "Loading cadet information..."
+    );
+
+
+    postData({
+
+        action: "viewCadet",
+
+        studentId:
+            currentStudent.id
+
+    })
+
+    .then(function(result) {
+
+        if (!result.success) {
+
+            showError(
+                result.message
+            );
+
+            return;
+
+        }
+
+
+        const student =
+            result.data.student;
+
+
+        document
+            .getElementById(
+                "cadetName"
+            )
+            .innerText =
+                student.firstName +
+                " " +
+                student.lastName;
+
+
+        document
+            .getElementById(
+                "cadetDetails"
+            )
+            .innerText =
+                formatStudentDetails();
+
+
+        displayCurrentItems(
+            result.data.currentItems
+        );
+
+
+        displayHistory(
+            result.data.history
+        );
+
+
+        hideAllCards();
+
+
+        document
+            .getElementById(
+                "cadetCard"
+            )
+            .classList
+            .remove("hidden");
+
+    })
+
+    .catch(function(error) {
+
+        showError(
+            "Could not load cadet information."
+        );
+
+        console.error(error);
+
+    });
+
+}
+
+
+function displayCurrentItems(items) {
+
+    const container =
+        document.getElementById(
+            "currentItems"
+        );
+
+
+    if (!items ||
+        items.length === 0) {
+
+        container.innerHTML =
+            "<p>No items are currently recorded as issued.</p>";
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        items.map(function(item) {
+
+            return `
+
+                <div class="item-row">
+
+                    <strong>
+                        ${escapeHtml(item.itemName)}
+                    </strong>
+
+                    <span>
+                        Item Code:
+                        ${escapeHtml(item.itemCode)}
+                    </span>
+
+                    <br>
+
+                    <span>
+                        Barcode:
+                        ${escapeHtml(item.itemBarcode)}
+                    </span>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+function displayHistory(history) {
+
+    const container =
+        document.getElementById(
+            "history"
+        );
+
+
+    if (!history ||
+        history.length === 0) {
+
+        container.innerHTML =
+            "<p>No transaction history.</p>";
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        history.map(function(txn) {
+
+            const actionClass =
+                "action-" +
+                txn.action;
+
+
+            return `
+
+                <div class="history-row">
+
+                    <strong>
+                        ${escapeHtml(txn.itemName)}
+                    </strong>
+
+                    <span
+                        class="${actionClass}">
+                        ${escapeHtml(txn.action)}
+                    </span>
+
+                    <br>
+
+                    <span>
+                        ${escapeHtml(
+                            String(txn.timestamp)
+                        )}
+                    </span>
+
+                    <br>
+
+                    <span>
+                        Transaction:
+                        ${escapeHtml(
+                            txn.transactionId
+                        )}
+                    </span>
+
+                    <br>
+
+                    <span>
+                        Clerk:
+                        ${escapeHtml(
+                            txn.clerk
+                        )}
+                    </span>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+/* =========================================================
+   SCANNER
+   ========================================================= */
+
+function showScanner(title) {
+
+    hideAllCards();
+
+
+    document
+        .getElementById(
+            "scannerCard"
+        )
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById(
+            "scannerTitle"
+        )
+        .innerText = title;
+
+
+    scanner =
+        new Html5Qrcode(
+            "reader"
+        );
+
+
+    scanner.start(
+
+        {
+            facingMode:
+                "environment"
+        },
+
+        {
+            fps: 10,
+
+            qrbox: {
+                width: 280,
+                height: 140
+            }
+
+        },
+
+        function(decodedText) {
+
+            stopScanner();
+
+            handleBarcode(
+                decodedText
+            );
+
+        },
+
+        function(errorMessage) {
+
+            // Continuous scanner errors
+            // are intentionally ignored.
+
+        }
+
     )
-    .then(response => response.json());
+    .catch(function(error) {
+
+        showError(
+            "Camera could not start. " +
+            "Make sure the browser has permission to use the camera."
+        );
+
+        console.error(error);
+
+    });
 
 }
 
 
+function stopScanner() {
 
-function manualStudent() {
+    if (!scanner) {
 
-    const id =
-        prompt("Enter Student ID:");
+        return;
 
-    if (!id) return;
+    }
 
-    lookupStudent(id);
+
+    scanner.stop()
+
+        .then(function() {
+
+            scanner.clear();
+
+        })
+
+        .catch(function() {
+
+            try {
+                scanner.clear();
+            }
+            catch (e) {}
+
+        });
+
+
+    scanner = null;
+
+
+    document
+        .getElementById(
+            "scannerCard"
+        )
+        .classList
+        .add("hidden");
 
 }
 
+
+function handleBarcode(barcode) {
+
+    barcode =
+        String(barcode)
+        .trim();
+
+
+    if (!barcode) {
+
+        showError(
+            "The scanner returned an empty barcode."
+        );
+
+        return;
+
+    }
+
+
+    if (scannerMode === "student") {
+
+        lookupStudent(barcode);
+
+        return;
+
+    }
+
+
+    if (scannerMode === "item") {
+
+        lookupItem(barcode);
+
+        return;
+
+    }
+
+}
+
+
+/* =========================================================
+   MANUAL ENTRY
+   ========================================================= */
+
+function submitManualEntry() {
+
+    const input =
+        document.getElementById(
+            "manualInput"
+        );
+
+
+    const value =
+        input.value.trim();
+
+
+    if (!value) {
+
+        alert(
+            "Please enter a barcode."
+        );
+
+        input.focus();
+
+        return;
+
+    }
+
+
+    if (
+        currentMode === "issue" ||
+        currentMode === "return" ||
+        currentMode === "exchange"
+    ) {
+
+        /*
+         * If we don't have a student yet,
+         * this is a student ID.
+         */
+
+        if (!currentStudent) {
+
+            lookupStudent(value);
+
+        }
+
+        else {
+
+            lookupItem(value);
+
+        }
+
+        return;
+
+    }
+
+
+    if (currentMode === "view") {
+
+        lookupStudent(value);
+
+        return;
+
+    }
+
+}
+
+
+/* =========================================================
+   UI HELPERS
+   ========================================================= */
+
+function hideAllCards() {
+
+    const ids = [
+
+        "home",
+        "studentCard",
+        "returnStudentCard",
+        "exchangeStudentCard",
+        "itemCard",
+        "exchangeOldItemCard",
+        "exchangeConfirmCard",
+        "cadetCard",
+        "scannerCard",
+        "manualCard",
+        "statusCard"
+
+    ];
+
+
+    ids.forEach(function(id) {
+
+        const element =
+            document.getElementById(id);
+
+
+        if (element) {
+
+            element
+                .classList
+                .add("hidden");
+
+        }
+
+    });
+
+}
+
+
+function showLoading(message) {
+
+    hideAllCards();
+
+
+    document
+        .getElementById(
+            "statusCard"
+        )
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById(
+            "statusTitle"
+        )
+        .innerText =
+            "Please Wait";
+
+
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .className =
+            "status";
+
+
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .innerHTML =
+            `<div class="loading">
+                ${escapeHtml(message)}
+             </div>`;
+
+}
+
+
+function showSuccess(
+    title,
+    message
+) {
+
+    hideAllCards();
+
+
+    document
+        .getElementById(
+            "statusCard"
+        )
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById(
+            "statusTitle"
+        )
+        .innerText =
+            title;
+
+
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .className =
+            "status success";
+
+
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .innerHTML =
+            message;
+
+}
 
 
 function showError(message) {
 
-    alert(message);
+    hideAllCards();
+
+
+    document
+        .getElementById(
+            "statusCard"
+        )
+        .classList
+        .remove("hidden");
+
+
+    document
+        .getElementById(
+            "statusTitle"
+        )
+        .innerText =
+            "⚠ Error";
+
+
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .className =
+            "status error";
+
+
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .innerText =
+            message;
 
 }
 
 
+function showDuplicateWarning(
+    message,
+    confirmFunction
+) {
+
+    hideAllCards();
+
+
+    const card =
+        document.getElementById(
+            "statusCard"
+        );
+
+
+    card.classList.remove(
+        "hidden"
+    );
+
+
+    document
+        .getElementById(
+            "statusTitle"
+        )
+        .innerText =
+            "⚠ Duplicate / Conflict";
+
+
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .className =
+            "status warning";
+
+
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .innerText =
+            message;
+
+
+    const button =
+        document.createElement(
+            "button"
+        );
+
+
+    button.className =
+        "warning";
+
+
+    button.innerText =
+        "Proceed Anyway";
+
+
+    button.onclick =
+        confirmFunction;
+
+
+    card.appendChild(
+        button
+    );
+
+
+    const cancel =
+        document.createElement(
+            "button"
+        );
+
+
+    cancel.className =
+        "secondary";
+
+
+    cancel.innerText =
+        "Cancel";
+
+
+    cancel.onclick =
+        resetApp;
+
+
+    card.appendChild(
+        cancel
+    );
+
+}
+
+
+function showReturnWarning(
+    message,
+    confirmFunction
+) {
+
+    showDuplicateWarning(
+        message,
+        confirmFunction
+    );
+
+}
+
+
+/* =========================================================
+   API
+   ========================================================= */
+
+function postData(data) {
+
+    return fetch(
+
+        APPS_SCRIPT_URL,
+
+        {
+
+            method:
+                "POST",
+
+            headers: {
+
+                "Content-Type":
+                    "text/plain;charset=utf-8"
+
+            },
+
+            body:
+                JSON.stringify(data)
+
+        }
+
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP " +
+                response.status
+            );
+
+        }
+
+
+        return response.json();
+
+    });
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
 
 function resetApp() {
+
+    stopScanner();
+
 
     currentStudent = null;
 
     currentItem = null;
 
+    oldItem = null;
+
+    newItem = null;
+
+    currentMode = null;
+
     scannerMode = null;
 
 
-    document
-        .getElementById("home")
-        .classList
-        .remove("hidden");
+    /*
+     * Restore original home menu.
+     */
 
-    document
-        .getElementById("studentCard")
-        .classList
-        .add("hidden");
+    location.reload();
 
-    document
-        .getElementById("itemCard")
-        .classList
-        .add("hidden");
+}
 
-    document
-        .getElementById("scannerCard")
-        .classList
-        .add("hidden");
 
-    document
-        .getElementById("statusCard")
-        .classList
-        .add("hidden");
+/* =========================================================
+   HTML SAFETY
+   ========================================================= */
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
 </script>
+
 
 </body>
 
