@@ -143,6 +143,12 @@ input {
             Look Up Cadet Issued Items
         </button>
 
+        <button
+            class="danger"
+            onclick="startReturnStudentScan()">
+            Return Item
+        </button>
+
     </div>
 
 
@@ -167,6 +173,12 @@ input {
             class="secondary"
             onclick="lookupIssuedItems()">
             View Issued Items
+        </button>
+
+        <button
+            class="danger"
+            onclick="startReturnItemScan()">
+            Return Item
         </button>
 
         <button
@@ -195,6 +207,34 @@ input {
             class="success"
             onclick="issueItem()">
             Confirm Issue
+        </button>
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+            Cancel
+        </button>
+
+    </div>
+
+
+    <!-- RETURN ITEM -->
+
+    <div id="returnItemCard"
+         class="card hidden">
+
+        <h2>Return Item</h2>
+
+        <div id="returnItemName"
+             class="item-name">
+        </div>
+
+        <p id="returnItemDetails"></p>
+
+        <button
+            class="danger"
+            onclick="returnItem()">
+            Confirm Return
         </button>
 
         <button
@@ -309,6 +349,30 @@ function startItemScan() {
 
 
 
+function startReturnStudentScan() {
+
+    scannerMode = "returnStudent";
+
+    showScanner(
+        "Scan Student ID"
+    );
+
+}
+
+
+
+function startReturnItemScan() {
+
+    scannerMode = "returnItem";
+
+    showScanner(
+        "Scan Item Barcode"
+    );
+
+}
+
+
+
 function showScanner(title) {
 
     document
@@ -323,6 +387,11 @@ function showScanner(title) {
 
     document
         .getElementById("itemCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("returnItemCard")
         .classList
         .add("hidden");
 
@@ -425,11 +494,81 @@ function handleBarcode(barcode) {
 
     }
 
+    else if (scannerMode === "returnStudent") {
+
+        lookupStudentForReturn(barcode);
+
+    }
+
+    else if (scannerMode === "returnItem") {
+
+        lookupReturnItem(barcode);
+
+    }
+
 }
 
 
 
 function lookupStudent(studentId) {
+
+    postData({
+
+        action: "lookupStudent",
+
+        studentId: studentId
+
+    })
+
+    .then(result => {
+
+        if (!result.success) {
+
+            showError(result.message);
+
+            return;
+
+        }
+
+
+        currentStudent =
+            result.data.student;
+
+
+        document
+            .getElementById("studentName")
+            .innerText =
+                currentStudent.firstName +
+                " " +
+                currentStudent.lastName;
+
+
+        document
+            .getElementById("studentDetails")
+            .innerText =
+                "ID: " +
+                currentStudent.id +
+                " | Grade: " +
+                currentStudent.grade +
+                " | " +
+                currentStudent.company +
+                " Company | " +
+                currentStudent.platoon +
+                " Platoon";
+
+
+        document
+            .getElementById("studentCard")
+            .classList
+            .remove("hidden");
+
+    });
+
+}
+
+
+
+function lookupStudentForReturn(studentId) {
 
     postData({
 
@@ -542,6 +681,61 @@ function lookupItem(itemBarcode) {
 
 
 
+function lookupReturnItem(itemBarcode) {
+
+    postData({
+
+        action: "lookupItem",
+
+        studentId: currentStudent.id,
+
+        itemBarcode: itemBarcode
+
+    })
+
+    .then(result => {
+
+        if (!result.success) {
+
+            showError(result.message);
+
+            return;
+
+        }
+
+
+        currentItem =
+            result.data.item;
+
+
+        document
+            .getElementById("returnItemName")
+            .innerText =
+                currentItem.itemName +
+                " — " +
+                currentItem.size;
+
+
+        document
+            .getElementById("returnItemDetails")
+            .innerText =
+                "Item Code: " +
+                currentItem.itemCode +
+                " | Category: " +
+                currentItem.category;
+
+
+        document
+            .getElementById("returnItemCard")
+            .classList
+            .remove("hidden");
+
+    });
+
+}
+
+
+
 function issueItem() {
 
     postData({
@@ -576,6 +770,53 @@ function issueItem() {
                 result.success
                 ? "✓ Issue Successful"
                 : "Issue Failed";
+
+
+        document
+            .getElementById("statusMessage")
+            .innerText =
+                result.message;
+
+    });
+
+}
+
+
+
+function returnItem() {
+
+    postData({
+
+        action: "return",
+
+        studentId: currentStudent.id,
+
+        itemBarcode: currentItem.barcode,
+
+        clerk: "Prototype Clerk"
+
+    })
+
+    .then(result => {
+
+        document
+            .getElementById("returnItemCard")
+            .classList
+            .add("hidden");
+
+
+        document
+            .getElementById("statusCard")
+            .classList
+            .remove("hidden");
+
+
+        document
+            .getElementById("statusTitle")
+            .innerText =
+                result.success
+                ? "✓ Return Successful"
+                : "Return Failed";
 
 
         document
@@ -765,6 +1006,11 @@ function resetApp() {
 
     document
         .getElementById("itemCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("returnItemCard")
         .classList
         .add("hidden");
 
