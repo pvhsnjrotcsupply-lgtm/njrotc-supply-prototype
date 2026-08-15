@@ -9,7 +9,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>NJROTC Supply Prototype</title>
+<title>NJROTC Supply Database</title>
 
 <script src="https://unpkg.com/html5-qrcode"
         type="text/javascript"></script>
@@ -98,6 +98,13 @@ input {
     background: #eee;
 }
 
+.inventory-row {
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background: #eee;
+}
+
 #reader {
     width: 100%;
     margin-top: 15px;
@@ -116,7 +123,7 @@ input {
 
         <h1>PVHS NJROTC</h1>
 
-        <div>SUPPLY PROTOTYPE</div>
+        <div>SUPPLY DATABASE</div>
 
     </div>
 
@@ -147,6 +154,12 @@ input {
             class="danger"
             onclick="startReturnStudentScan()">
             Return Item
+        </button>
+
+        <button
+            class="secondary"
+            onclick="lookupInventory()">
+            View Inventory
         </button>
 
     </div>
@@ -258,6 +271,24 @@ input {
         </div>
 
         <div id="issuedItems"></div>
+
+        <button
+            class="secondary"
+            onclick="resetApp()">
+            Back
+        </button>
+
+    </div>
+
+
+    <!-- INVENTORY -->
+
+    <div id="inventoryCard"
+         class="card hidden">
+
+        <h2>Inventory</h2>
+
+        <div id="inventoryItems"></div>
 
         <button
             class="secondary"
@@ -397,6 +428,11 @@ function showScanner(title) {
 
     document
         .getElementById("issuedCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("inventoryCard")
         .classList
         .add("hidden");
 
@@ -941,6 +977,80 @@ function lookupIssuedItemsForStudent(studentId) {
 
 
 
+function lookupInventory() {
+
+    postData({
+
+        action: "lookupInventory",
+
+        studentId: "inventory"
+
+    })
+
+    .then(result => {
+
+        if (!result.success) {
+
+            showError(result.message);
+
+            return;
+
+        }
+
+
+        document
+            .getElementById("home")
+            .classList
+            .add("hidden");
+
+
+        document
+            .getElementById("inventoryCard")
+            .classList
+            .remove("hidden");
+
+
+        const container =
+            document.getElementById("inventoryItems");
+
+
+        container.innerHTML = "";
+
+
+        result.data.inventory.forEach(item => {
+
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "inventory-row";
+
+
+            div.innerText =
+                item.itemName +
+                " — " +
+                item.size +
+                "\n\n" +
+                "Total: " +
+                item.total +
+                "\n" +
+                "Issued: " +
+                item.issued +
+                "\n" +
+                "In Stock: " +
+                item.stock;
+
+
+            container.appendChild(div);
+
+        });
+
+    });
+
+}
+
+
+
 function postData(data) {
 
     return fetch(
@@ -1016,6 +1126,11 @@ function resetApp() {
 
     document
         .getElementById("issuedCard")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("inventoryCard")
         .classList
         .add("hidden");
 
