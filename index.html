@@ -2,8 +2,13 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>PVHS NJROTC Supply</title>
 
@@ -13,6 +18,7 @@
     </script>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -49,18 +55,12 @@
             opacity: 0.8;
         }
 
-        .version {
-            margin-top: 8px;
-            font-size: 12px;
-            opacity: 0.55;
-        }
-
         .card {
             background: white;
             padding: 20px;
             margin-bottom: 15px;
             border-radius: 14px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .hidden {
@@ -69,10 +69,6 @@
 
         h2 {
             margin-top: 0;
-        }
-
-        h3 {
-            margin-bottom: 10px;
         }
 
         button {
@@ -86,10 +82,6 @@
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
-        }
-
-        button:hover {
-            opacity: 0.9;
         }
 
         button.secondary {
@@ -142,7 +134,6 @@
             border-radius: 9px;
             background: #eee;
             line-height: 1.5;
-            overflow-wrap: anywhere;
         }
 
         .status.success {
@@ -160,21 +151,22 @@
             color: #856404;
         }
 
-        .status.info {
-            background: #e7f1ff;
-            color: #164a7b;
-        }
-
         .menu-button {
             padding: 20px;
             font-size: 18px;
         }
 
+        .scan-button {
+            font-size: 18px;
+        }
+
+        .back-button {
+            margin-top: 20px;
+        }
+
         #reader {
             width: 100%;
             margin-top: 15px;
-            overflow: hidden;
-            border-radius: 10px;
         }
 
         .item-row {
@@ -211,11 +203,6 @@
             font-weight: bold;
         }
 
-        .action-EXCHANGE {
-            color: #b06b00;
-            font-weight: bold;
-        }
-
         .small {
             font-size: 13px;
             color: #666;
@@ -227,74 +214,76 @@
             font-size: 18px;
         }
 
-        .divider {
-            border: none;
-            border-top: 1px solid #ddd;
-            margin: 20px 0;
-        }
-
         .debug-box {
             margin-top: 15px;
-            padding: 12px;
+            padding: 10px;
             background: #f4f4f4;
             border-radius: 8px;
             font-family: monospace;
             font-size: 12px;
-            white-space: pre-wrap;
-            word-break: break-word;
+            overflow-wrap: anywhere;
         }
 
-        .online-indicator {
-            display: inline-block;
-            margin-top: 8px;
-            font-size: 12px;
-            color: #7cff8a;
-        }
     </style>
+
 </head>
+
 
 <body>
 
 <div class="container">
 
+
     <!-- HEADER -->
+
     <div class="header">
+
         <h1>PVHS NJROTC</h1>
 
         <div>
-            SUPPLY MANAGEMENT PROTOTYPE
+            SUPPLY MANAGEMENT PROTOTYPE — v0.2.2
         </div>
 
-        <div class="version">
-            Version 0.2.2
-        </div>
-
-        <div id="serverStatus" class="online-indicator">
-            Checking server...
-        </div>
     </div>
 
 
-    <!-- HOME -->
-    <div id="home" class="card">
+    <!-- MAIN MENU -->
+
+    <div
+        id="home"
+        class="card"
+    >
 
         <h2>Supply Operations</h2>
 
-        <button class="menu-button" onclick="startIssue()">
+        <button
+            class="menu-button"
+            onclick="startIssue()"
+        >
             📦 ISSUE ITEM
         </button>
 
-        <button class="menu-button" onclick="startReturn()">
+        <button
+            class="menu-button"
+            onclick="startReturn()"
+        >
             ↩️ RETURN ITEM
         </button>
 
-        <button class="menu-button" onclick="startExchange()">
+        <button
+            class="menu-button"
+            onclick="startExchange()"
+        >
             🔄 EXCHANGE ITEM
         </button>
 
-        <button class="menu-button" onclick="startViewCadet()">
+        <button
+            class="menu-button"
+            onclick="startViewCadet()"
+        >
             👤 VIEW CADET
         </button>
+
 
         <label for="clerkName">
             Supply Clerk
@@ -304,35 +293,51 @@
             id="clerkName"
             type="text"
             placeholder="Enter clerk name"
-            autocomplete="off"
+            autocomplete="name"
         >
 
         <p class="small">
-            Your clerk name will be attached to transactions
-            created during this session.
+            Your clerk name will be attached
+            to transactions created during
+            this session.
         </p>
 
     </div>
 
 
     <!-- STUDENT CARD -->
-    <div id="studentCard" class="card hidden">
+
+    <div
+        id="studentCard"
+        class="card hidden"
+    >
 
         <h2>Student</h2>
 
-        <div id="studentName" class="student-name"></div>
+        <div
+            id="studentName"
+            class="student-name">
+        </div>
 
         <div id="studentDetails"></div>
 
-        <button onclick="startItemScan()">
+        <button
+            onclick="startItemScan()"
+        >
             📷 Scan Item Barcode
         </button>
 
-        <button class="secondary" onclick="manualItem()">
+        <button
+            class="secondary"
+            onclick="manualItem()"
+        >
             ⌨️ Enter Item Barcode
         </button>
 
-        <button class="secondary" onclick="resetApp()">
+        <button
+            class="secondary"
+            onclick="resetApp()"
+        >
             Cancel
         </button>
 
@@ -340,23 +345,38 @@
 
 
     <!-- RETURN STUDENT CARD -->
-    <div id="returnStudentCard" class="card hidden">
+
+    <div
+        id="returnStudentCard"
+        class="card hidden"
+    >
 
         <h2>Return Item</h2>
 
-        <div id="returnStudentName" class="student-name"></div>
+        <div
+            id="returnStudentName"
+            class="student-name">
+        </div>
 
         <div id="returnStudentDetails"></div>
 
-        <button onclick="startItemScan()">
+        <button
+            onclick="startItemScan()"
+        >
             📷 Scan Item to Return
         </button>
 
-        <button class="secondary" onclick="manualItem()">
+        <button
+            class="secondary"
+            onclick="manualItem()"
+        >
             ⌨️ Enter Item Barcode
         </button>
 
-        <button class="secondary" onclick="resetApp()">
+        <button
+            class="secondary"
+            onclick="resetApp()"
+        >
             Cancel
         </button>
 
@@ -364,27 +384,43 @@
 
 
     <!-- EXCHANGE STUDENT CARD -->
-    <div id="exchangeStudentCard" class="card hidden">
+
+    <div
+        id="exchangeStudentCard"
+        class="card hidden"
+    >
 
         <h2>Exchange Item</h2>
 
-        <div id="exchangeStudentName" class="student-name"></div>
+        <div
+            id="exchangeStudentName"
+            class="student-name">
+        </div>
 
         <div id="exchangeStudentDetails"></div>
 
         <p>
-            First scan or enter the item being returned.
+            First scan or enter the item
+            being returned.
         </p>
 
-        <button onclick="startItemScan()">
+        <button
+            onclick="startItemScan()"
+        >
             📷 Scan Old Item
         </button>
 
-        <button class="secondary" onclick="manualItem()">
+        <button
+            class="secondary"
+            onclick="manualItem()"
+        >
             ⌨️ Enter Old Item Barcode
         </button>
 
-        <button class="secondary" onclick="resetApp()">
+        <button
+            class="secondary"
+            onclick="resetApp()"
+        >
             Cancel
         </button>
 
@@ -392,23 +428,34 @@
 
 
     <!-- ITEM CARD -->
-    <div id="itemCard" class="card hidden">
+
+    <div
+        id="itemCard"
+        class="card hidden"
+    >
 
         <h2 id="itemActionTitle">
             Item
         </h2>
 
-        <div id="itemName" class="item-name"></div>
+        <div
+            id="itemName"
+            class="item-name">
+        </div>
 
         <div id="itemDetails"></div>
 
         <button
             class="success"
-            onclick="confirmPrimaryAction()">
-            Confirm
+            onclick="confirmPrimaryAction()"
+        >
+            ✓ Confirm
         </button>
 
-        <button class="secondary" onclick="resetApp()">
+        <button
+            class="secondary"
+            onclick="resetApp()"
+        >
             Cancel
         </button>
 
@@ -416,11 +463,18 @@
 
 
     <!-- EXCHANGE OLD ITEM -->
-    <div id="exchangeOldItemCard" class="card hidden">
+
+    <div
+        id="exchangeOldItemCard"
+        class="card hidden"
+    >
 
         <h2>Old Item</h2>
 
-        <div id="oldItemName" class="item-name"></div>
+        <div
+            id="oldItemName"
+            class="item-name">
+        </div>
 
         <div id="oldItemDetails"></div>
 
@@ -428,15 +482,23 @@
             Now scan the replacement item.
         </p>
 
-        <button onclick="startItemScan()">
+        <button
+            onclick="startItemScan()"
+        >
             📷 Scan New Item
         </button>
 
-        <button class="secondary" onclick="manualItem()">
+        <button
+            class="secondary"
+            onclick="manualItem()"
+        >
             ⌨️ Enter New Item Barcode
         </button>
 
-        <button class="secondary" onclick="resetApp()">
+        <button
+            class="secondary"
+            onclick="resetApp()"
+        >
             Cancel
         </button>
 
@@ -444,7 +506,11 @@
 
 
     <!-- EXCHANGE CONFIRMATION -->
-    <div id="exchangeConfirmCard" class="card hidden">
+
+    <div
+        id="exchangeConfirmCard"
+        class="card hidden"
+    >
 
         <h2>Confirm Exchange</h2>
 
@@ -452,23 +518,33 @@
             <strong>Returning:</strong>
         </p>
 
-        <div id="exchangeOldDisplay" class="item-name"></div>
+        <div
+            id="exchangeOldDisplay"
+            class="item-name">
+        </div>
 
-        <hr class="divider">
+        <hr>
 
         <p>
             <strong>Issuing:</strong>
         </p>
 
-        <div id="exchangeNewDisplay" class="item-name"></div>
+        <div
+            id="exchangeNewDisplay"
+            class="item-name">
+        </div>
 
         <button
             class="success"
-            onclick="confirmExchange()">
+            onclick="confirmExchange()"
+        >
             ✓ Confirm Exchange
         </button>
 
-        <button class="secondary" onclick="resetApp()">
+        <button
+            class="secondary"
+            onclick="resetApp()"
+        >
             Cancel
         </button>
 
@@ -476,27 +552,37 @@
 
 
     <!-- CADET VIEW -->
-    <div id="cadetCard" class="card hidden">
+
+    <div
+        id="cadetCard"
+        class="card hidden"
+    >
 
         <h2>Cadet Information</h2>
 
-        <div id="cadetName" class="student-name"></div>
+        <div
+            id="cadetName"
+            class="student-name">
+        </div>
 
         <div id="cadetDetails"></div>
 
-        <hr class="divider">
+        <hr>
 
         <h3>Currently Issued</h3>
 
         <div id="currentItems"></div>
 
-        <hr class="divider">
+        <hr>
 
         <h3>Transaction History</h3>
 
         <div id="history"></div>
 
-        <button class="secondary" onclick="resetApp()">
+        <button
+            class="secondary"
+            onclick="resetApp()"
+        >
             Back to Menu
         </button>
 
@@ -504,7 +590,11 @@
 
 
     <!-- SCANNER -->
-    <div id="scannerCard" class="card hidden">
+
+    <div
+        id="scannerCard"
+        class="card hidden"
+    >
 
         <h2 id="scannerTitle">
             Scan
@@ -514,7 +604,8 @@
 
         <button
             class="secondary"
-            onclick="stopScanner()">
+            onclick="stopScanner()"
+        >
             Cancel Scan
         </button>
 
@@ -522,29 +613,35 @@
 
 
     <!-- MANUAL ENTRY -->
-    <div id="manualCard" class="card hidden">
+
+    <div
+        id="manualCard"
+        class="card hidden"
+    >
 
         <h2 id="manualTitle">
             Manual Entry
         </h2>
 
-        <p id="manualDescription" class="small"></p>
-
         <input
             id="manualInput"
             type="text"
-            inputmode="numeric"
+            inputmode="text"
             autocomplete="off"
             placeholder="Enter barcode"
         >
 
         <button
             class="success"
-            onclick="submitManualEntry()">
+            onclick="submitManualEntry()"
+        >
             Look Up
         </button>
 
-        <button class="secondary" onclick="resetApp()">
+        <button
+            class="secondary"
+            onclick="resetApp()"
+        >
             Cancel
         </button>
 
@@ -552,22 +649,33 @@
 
 
     <!-- STATUS -->
-    <div id="statusCard" class="card hidden">
+
+    <div
+        id="statusCard"
+        class="card hidden"
+    >
 
         <h2 id="statusTitle"></h2>
 
-        <div id="statusMessage" class="status"></div>
+        <div
+            id="statusMessage"
+            class="status">
+        </div>
 
-        <button onclick="resetApp()">
+        <button
+            onclick="resetApp()"
+        >
             Return to Menu
         </button>
 
     </div>
 
+
 </div>
 
 
 <script>
+
 
 /* =========================================================
    CONFIGURATION
@@ -577,21 +685,22 @@ const APPS_SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbw11OfZGhx0GB6GSvyod9G5MKR3ymAPtUW_6MJMcqbvnrSofMPRzXxfOWazhDPoUorm/exec";
 
 
-const APP_VERSION = "0.2.2";
-
-
 /* =========================================================
-   STATE
+   APPLICATION STATE
    ========================================================= */
 
 let currentStudent = null;
+
 let currentItem = null;
 
 let oldItem = null;
+
 let newItem = null;
 
 let currentMode = null;
+
 let scanner = null;
+
 let scannerMode = null;
 
 let requestInProgress = false;
@@ -601,13 +710,18 @@ let requestInProgress = false;
    INITIALIZATION
    ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
 
-    loadClerk();
+        loadClerk();
 
-    checkServer();
+        console.log(
+            "PVHS NJROTC Supply v0.2.2 loaded."
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -617,7 +731,9 @@ document.addEventListener("DOMContentLoaded", function () {
 function loadClerk() {
 
     const saved =
-        localStorage.getItem("njrotc_supply_clerk");
+        localStorage.getItem(
+            "njrotc_supply_clerk"
+        );
 
     if (saved) {
 
@@ -633,7 +749,9 @@ function loadClerk() {
 function saveClerk() {
 
     const input =
-        document.getElementById("clerkName");
+        document.getElementById(
+            "clerkName"
+        );
 
     const clerk =
         input.value.trim();
@@ -645,85 +763,9 @@ function saveClerk() {
             clerk
         );
 
-        return clerk;
-
     }
 
-    return "Unknown Clerk";
-
-}
-
-
-/* =========================================================
-   SERVER CHECK
-   ========================================================= */
-
-function checkServer() {
-
-    const indicator =
-        document.getElementById("serverStatus");
-
-    indicator.innerText =
-        "Checking server...";
-
-    fetch(APPS_SCRIPT_URL + "?action=status")
-
-        .then(function (response) {
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "HTTP " + response.status
-                );
-
-            }
-
-            return response.text();
-
-        })
-
-        .then(function (text) {
-
-            try {
-
-                const result =
-                    JSON.parse(text);
-
-                if (result.success) {
-
-                    indicator.innerText =
-                        "● Server Online";
-
-                    return;
-
-                }
-
-            }
-            catch (error) {
-
-                console.warn(
-                    "Status response was not JSON:",
-                    text
-                );
-
-            }
-
-            indicator.innerText =
-                "● Server Connected";
-
-        })
-
-        .catch(function (error) {
-
-            console.error(
-                "Server check failed:",
-                error
-            );
-
-            indicator.innerText =
-                "● Server Check Failed";
-
-        });
+    return clerk || "Unknown Clerk";
 
 }
 
@@ -768,26 +810,29 @@ function startViewCadet() {
 }
 
 
+/* =========================================================
+   MODE TITLES
+   ========================================================= */
+
 function getModeTitle() {
 
-    switch (currentMode) {
-
-        case "issue":
-            return "Issue Item";
-
-        case "return":
-            return "Return Item";
-
-        case "exchange":
-            return "Exchange Item";
-
-        case "view":
-            return "View Cadet";
-
-        default:
-            return "Supply";
-
+    if (currentMode === "issue") {
+        return "Issue Item";
     }
+
+    if (currentMode === "return") {
+        return "Return Item";
+    }
+
+    if (currentMode === "exchange") {
+        return "Exchange Item";
+    }
+
+    if (currentMode === "view") {
+        return "View Cadet";
+    }
+
+    return "Supply";
 
 }
 
@@ -798,12 +843,14 @@ function getModeTitle() {
 
 function startStudentInput() {
 
+    stopScanner();
+
     hideAllCards();
 
-    const home =
+    const card =
         document.getElementById("home");
 
-    home.innerHTML = `
+    card.innerHTML = `
 
         <h2>${getModeTitle()}</h2>
 
@@ -812,66 +859,77 @@ function startStudentInput() {
             or enter the ID manually.
         </p>
 
-        <button onclick="startStudentScan()">
+        <button
+            onclick="startStudentScan()"
+        >
             📷 Scan Student ID
         </button>
 
         <button
             class="secondary"
-            onclick="manualStudent()">
+            onclick="manualStudent()"
+        >
             ⌨️ Enter Student ID
         </button>
 
         <button
             class="secondary"
-            onclick="resetApp()">
+            onclick="resetApp()"
+        >
             Cancel
         </button>
 
     `;
 
-    home.classList.remove("hidden");
+    card.classList.remove("hidden");
 
 }
 
 
 /* =========================================================
-   STUDENT SCANNING
+   STUDENT SCANNER
    ========================================================= */
 
 function startStudentScan() {
 
     scannerMode = "student";
 
-    showScanner("Scan Student ID");
+    showScanner(
+        "Scan Student ID"
+    );
 
 }
 
 
+/* =========================================================
+   MANUAL STUDENT
+   ========================================================= */
+
 function manualStudent() {
+
+    stopScanner();
 
     hideAllCards();
 
-    const card =
-        document.getElementById("manualCard");
-
-    card.classList.remove("hidden");
+    document
+        .getElementById("manualCard")
+        .classList
+        .remove("hidden");
 
     document
         .getElementById("manualTitle")
         .innerText =
             "Enter Student ID";
 
-    document
-        .getElementById("manualDescription")
-        .innerText =
-            "Enter the value contained in the student's school ID barcode.";
-
     const input =
-        document.getElementById("manualInput");
+        document.getElementById(
+            "manualInput"
+        );
 
     input.value = "";
-    input.placeholder = "Enter Student ID";
+
+    input.placeholder =
+        "Enter Student ID";
 
     input.focus();
 
@@ -890,45 +948,40 @@ function lookupStudent(studentId) {
     if (!studentId) {
 
         showError(
-            "No student ID was provided."
+            "Student ID is empty."
         );
 
         return;
 
     }
 
-    showLoading("Finding student...");
+    showLoading(
+        "Finding student..."
+    );
 
     postData({
 
         action: "lookupStudent",
 
-        studentId: studentId
+        studentId:
+            studentId
 
     })
 
-    .then(function (result) {
+    .then(function(result) {
 
-        if (!result.success) {
+        console.log(
+            "Student lookup result:",
+            result
+        );
 
-            showError(
-                result.message ||
-                "Student could not be found.",
-                result
-            );
-
-            return;
-
-        }
-
-        if (
-            !result.data ||
-            !result.data.student
-        ) {
+        if (!result || !result.success) {
 
             showError(
-                "The server returned a successful response, but no student record was included.",
-                result
+                result &&
+                result.message
+                    ? result.message
+                    : "Student was not found."
             );
 
             return;
@@ -937,6 +990,16 @@ function lookupStudent(studentId) {
 
         currentStudent =
             result.data.student;
+
+        if (!currentStudent) {
+
+            showError(
+                "The server found the student, but did not return student data."
+            );
+
+            return;
+
+        }
 
         if (currentMode === "view") {
 
@@ -950,14 +1013,17 @@ function lookupStudent(studentId) {
 
     })
 
-    .catch(function (error) {
+    .catch(function(error) {
 
-        showError(
-            "Could not contact the Supply server.",
+        console.error(
+            "STUDENT LOOKUP FAILED:",
             error
         );
 
-        console.error(error);
+        showError(
+            "Could not contact Supply server: " +
+            error.message
+        );
 
     });
 
@@ -976,31 +1042,49 @@ function showStudentConfirmation() {
 
     if (currentMode === "return") {
 
-        cardId = "returnStudentCard";
+        cardId =
+            "returnStudentCard";
 
     }
-    else if (currentMode === "exchange") {
 
-        cardId = "exchangeStudentCard";
+    else if (
+        currentMode === "exchange"
+    ) {
+
+        cardId =
+            "exchangeStudentCard";
 
     }
 
     const card =
-        document.getElementById(cardId);
+        document.getElementById(
+            cardId
+        );
 
     const name =
-        currentStudent.firstName +
+        (
+            currentStudent.firstName ||
+            ""
+        ) +
         " " +
-        currentStudent.lastName;
+        (
+            currentStudent.lastName ||
+            ""
+        );
 
     if (currentMode === "issue") {
 
         document
-            .getElementById("studentName")
-            .innerText = name;
+            .getElementById(
+                "studentName"
+            )
+            .innerText =
+                name.trim();
 
         document
-            .getElementById("studentDetails")
+            .getElementById(
+                "studentDetails"
+            )
             .innerText =
                 formatStudentDetails();
 
@@ -1009,11 +1093,16 @@ function showStudentConfirmation() {
     if (currentMode === "return") {
 
         document
-            .getElementById("returnStudentName")
-            .innerText = name;
+            .getElementById(
+                "returnStudentName"
+            )
+            .innerText =
+                name.trim();
 
         document
-            .getElementById("returnStudentDetails")
+            .getElementById(
+                "returnStudentDetails"
+            )
             .innerText =
                 formatStudentDetails();
 
@@ -1022,11 +1111,16 @@ function showStudentConfirmation() {
     if (currentMode === "exchange") {
 
         document
-            .getElementById("exchangeStudentName")
-            .innerText = name;
+            .getElementById(
+                "exchangeStudentName"
+            )
+            .innerText =
+                name.trim();
 
         document
-            .getElementById("exchangeStudentDetails")
+            .getElementById(
+                "exchangeStudentDetails"
+            )
             .innerText =
                 formatStudentDetails();
 
@@ -1036,6 +1130,10 @@ function showStudentConfirmation() {
 
 }
 
+
+/* =========================================================
+   STUDENT DETAILS
+   ========================================================= */
 
 function formatStudentDetails() {
 
@@ -1062,7 +1160,7 @@ function formatStudentDetails() {
 
 
 /* =========================================================
-   ITEM SCANNING
+   ITEM SCANNER
    ========================================================= */
 
 function startItemScan() {
@@ -1087,7 +1185,9 @@ function getItemScanTitle() {
 
     }
 
-    if (currentMode === "return") {
+    if (
+        currentMode === "return"
+    ) {
 
         return "Scan Item to Return";
 
@@ -1098,30 +1198,35 @@ function getItemScanTitle() {
 }
 
 
+/* =========================================================
+   MANUAL ITEM
+   ========================================================= */
+
 function manualItem() {
+
+    stopScanner();
 
     hideAllCards();
 
-    const card =
-        document.getElementById("manualCard");
-
-    card.classList.remove("hidden");
+    document
+        .getElementById("manualCard")
+        .classList
+        .remove("hidden");
 
     document
         .getElementById("manualTitle")
         .innerText =
             getItemScanTitle();
 
-    document
-        .getElementById("manualDescription")
-        .innerText =
-            "Enter the item barcode manually.";
-
     const input =
-        document.getElementById("manualInput");
+        document.getElementById(
+            "manualInput"
+        );
 
     input.value = "";
-    input.placeholder = "Enter Item Barcode";
+
+    input.placeholder =
+        "Enter Item Barcode";
 
     input.focus();
 
@@ -1140,7 +1245,7 @@ function lookupItem(itemBarcode) {
     if (!itemBarcode) {
 
         showError(
-            "No item barcode was provided."
+            "Item barcode is empty."
         );
 
         return;
@@ -1150,49 +1255,43 @@ function lookupItem(itemBarcode) {
     if (!currentStudent) {
 
         showError(
-            "No student is currently selected."
+            "No student has been selected."
         );
 
         return;
 
     }
 
-    showLoading("Finding item...");
+    showLoading(
+        "Finding item..."
+    );
 
     postData({
 
         action: "lookupItem",
 
         studentId:
-            currentStudent.id,
+            String(currentStudent.id),
 
         itemBarcode:
             itemBarcode
 
     })
 
-    .then(function (result) {
+    .then(function(result) {
 
-        if (!result.success) {
+        console.log(
+            "Item lookup result:",
+            result
+        );
 
-            showError(
-                result.message ||
-                "Item could not be found.",
-                result
-            );
-
-            return;
-
-        }
-
-        if (
-            !result.data ||
-            !result.data.item
-        ) {
+        if (!result || !result.success) {
 
             showError(
-                "The server returned a successful response, but no item record was included.",
-                result
+                result &&
+                result.message
+                    ? result.message
+                    : "Item was not found."
             );
 
             return;
@@ -1202,8 +1301,19 @@ function lookupItem(itemBarcode) {
         const item =
             result.data.item;
 
+        if (!item) {
+
+            showError(
+                "The server found the item, but did not return item data."
+            );
+
+            return;
+
+        }
+
         /*
-         * EXCHANGE - SECOND ITEM
+         * EXCHANGE:
+         * second item
          */
 
         if (
@@ -1220,7 +1330,8 @@ function lookupItem(itemBarcode) {
         }
 
         /*
-         * EXCHANGE - FIRST ITEM
+         * EXCHANGE:
+         * first item
          */
 
         if (
@@ -1245,14 +1356,17 @@ function lookupItem(itemBarcode) {
 
     })
 
-    .catch(function (error) {
+    .catch(function(error) {
 
-        showError(
-            "Could not contact the Supply server.",
+        console.error(
+            "ITEM LOOKUP FAILED:",
             error
         );
 
-        console.error(error);
+        showError(
+            "Could not contact Supply server: " +
+            error.message
+        );
 
     });
 
@@ -1268,43 +1382,99 @@ function showItemConfirmation() {
     hideAllCards();
 
     const card =
-        document.getElementById("itemCard");
+        document.getElementById(
+            "itemCard"
+        );
 
     let title = "Item";
 
     if (currentMode === "issue") {
 
-        title = "Confirm Issue";
+        title =
+            "Confirm Issue";
 
     }
-    else if (currentMode === "return") {
 
-        title = "Confirm Return";
+    else if (
+        currentMode === "return"
+    ) {
+
+        title =
+            "Confirm Return";
 
     }
 
     document
-        .getElementById("itemActionTitle")
-        .innerText = title;
-
-    document
-        .getElementById("itemName")
+        .getElementById(
+            "itemActionTitle"
+        )
         .innerText =
-            safeValue(currentItem.itemName) +
+            title;
+
+    document
+        .getElementById(
+            "itemName"
+        )
+        .innerText =
+
+            safeValue(
+                currentItem.itemName
+            ) +
+
             " — " +
-            safeValue(currentItem.size);
+
+            safeValue(
+                currentItem.size
+            );
 
     document
-        .getElementById("itemDetails")
+        .getElementById(
+            "itemDetails"
+        )
         .innerText =
+
             "Item Code: " +
-            safeValue(currentItem.itemCode) +
+
+            safeValue(
+                currentItem.itemCode
+            ) +
+
             " | Category: " +
-            safeValue(currentItem.category) +
+
+            safeValue(
+                currentItem.category
+            ) +
+
             " | Barcode: " +
-            safeValue(currentItem.barcode);
+
+            getItemBarcode();
 
     card.classList.remove("hidden");
+
+}
+
+
+/* =========================================================
+   ITEM BARCODE EXTRACTION
+   ========================================================= */
+
+function getItemBarcode() {
+
+    if (!currentItem) {
+        return "";
+    }
+
+    return String(
+
+        currentItem.barcode ||
+
+        currentItem.itemBarcode ||
+
+        currentItem.itemCode ||
+
+        ""
+
+    ).trim();
 
 }
 
@@ -1318,22 +1488,46 @@ function showOldItem() {
     hideAllCards();
 
     document
-        .getElementById("oldItemName")
+        .getElementById(
+            "oldItemName"
+        )
         .innerText =
-            safeValue(oldItem.itemName) +
+
+            safeValue(
+                oldItem.itemName
+            ) +
+
             " — " +
-            safeValue(oldItem.size);
+
+            safeValue(
+                oldItem.size
+            );
 
     document
-        .getElementById("oldItemDetails")
+        .getElementById(
+            "oldItemDetails"
+        )
         .innerText =
+
             "Item Code: " +
-            safeValue(oldItem.itemCode) +
+
+            safeValue(
+                oldItem.itemCode
+            ) +
+
             " | Barcode: " +
-            safeValue(oldItem.barcode);
+
+            (
+                oldItem.barcode ||
+                oldItem.itemBarcode ||
+                oldItem.itemCode ||
+                ""
+            );
 
     document
-        .getElementById("exchangeOldItemCard")
+        .getElementById(
+            "exchangeOldItemCard"
+        )
         .classList
         .remove("hidden");
 
@@ -1345,21 +1539,41 @@ function showExchangeConfirmation() {
     hideAllCards();
 
     document
-        .getElementById("exchangeOldDisplay")
+        .getElementById(
+            "exchangeOldDisplay"
+        )
         .innerText =
-            safeValue(oldItem.itemName) +
+
+            safeValue(
+                oldItem.itemName
+            ) +
+
             " — " +
-            safeValue(oldItem.size);
+
+            safeValue(
+                oldItem.size
+            );
 
     document
-        .getElementById("exchangeNewDisplay")
+        .getElementById(
+            "exchangeNewDisplay"
+        )
         .innerText =
-            safeValue(newItem.itemName) +
+
+            safeValue(
+                newItem.itemName
+            ) +
+
             " — " +
-            safeValue(newItem.size);
+
+            safeValue(
+                newItem.size
+            );
 
     document
-        .getElementById("exchangeConfirmCard")
+        .getElementById(
+            "exchangeConfirmCard"
+        )
         .classList
         .remove("hidden");
 
@@ -1367,12 +1581,73 @@ function showExchangeConfirmation() {
 
 
 /* =========================================================
-   PRIMARY ACTION
+   PRIMARY CONFIRM
    ========================================================= */
 
 function confirmPrimaryAction() {
 
+    console.log(
+        "================================"
+    );
+
+    console.log(
+        "CONFIRM BUTTON PRESSED"
+    );
+
+    console.log(
+        "Current mode:",
+        currentMode
+    );
+
+    console.log(
+        "Current student:",
+        currentStudent
+    );
+
+    console.log(
+        "Current item:",
+        currentItem
+    );
+
+    console.log(
+        "================================"
+    );
+
     if (requestInProgress) {
+
+        console.warn(
+            "Request already in progress."
+        );
+
+        return;
+
+    }
+
+    if (!currentMode) {
+
+        showError(
+            "The system does not know what operation you are performing."
+        );
+
+        return;
+
+    }
+
+    if (!currentStudent) {
+
+        showError(
+            "No student is selected."
+        );
+
+        return;
+
+    }
+
+    if (!currentItem) {
+
+        showError(
+            "No item is selected."
+        );
 
         return;
 
@@ -1394,18 +1669,28 @@ function confirmPrimaryAction() {
 
     }
 
+    showError(
+        "This operation is not available."
+    );
+
 }
 
 
 /* =========================================================
-   ISSUE
+   ISSUE ITEM
    ========================================================= */
 
 function issueItem(force) {
 
+    console.log(
+        "=== ISSUE START ==="
+    );
+
     if (!currentStudent) {
 
-        showError("No student selected.");
+        showError(
+            "No student is currently selected."
+        );
 
         return;
 
@@ -1413,147 +1698,208 @@ function issueItem(force) {
 
     if (!currentItem) {
 
-        showError("No item selected.");
+        showError(
+            "No item is currently selected."
+        );
 
         return;
 
     }
 
-    const clerk =
-        saveClerk();
+    const barcode =
+        getItemBarcode();
+
+    console.log(
+        "Student ID:",
+        currentStudent.id
+    );
+
+    console.log(
+        "Item object:",
+        currentItem
+    );
+
+    console.log(
+        "Barcode being submitted:",
+        barcode
+    );
+
+    if (!barcode) {
+
+        showError(
+            "The selected item does not contain a usable barcode."
+        );
+
+        return;
+
+    }
+
+    requestInProgress = true;
 
     showLoading(
         "Processing issue..."
     );
 
-    requestInProgress = true;
-
-    postData({
+    const requestData = {
 
         action: "issue",
 
         studentId:
-            currentStudent.id,
+            String(
+                currentStudent.id
+            ),
 
         itemBarcode:
-            currentItem.barcode,
+            String(barcode),
 
         clerk:
-            clerk,
+            saveClerk(),
 
         force:
             force === true
 
-    })
+    };
 
-    .then(function (result) {
+    console.log(
+        "Sending issue request:",
+        requestData
+    );
 
-        requestInProgress = false;
+    postData(requestData)
 
-        console.log(
-            "ISSUE RESPONSE:",
-            result
-        );
+        .then(function(result) {
 
-        if (
-            !result.success &&
-            result.data &&
-            result.data.requiresConfirmation
-        ) {
+            requestInProgress = false;
 
-            showDuplicateWarning(
-                result.message,
-                function () {
-                    issueItem(true);
-                }
-            );
-
-            return;
-
-        }
-
-        if (!result.success) {
-
-            showError(
-                result.message ||
-                "The issue transaction failed.",
+            console.log(
+                "ISSUE SERVER RESPONSE:",
                 result
             );
 
-            return;
+            if (
+                !result ||
+                typeof result !== "object"
+            ) {
 
-        }
+                showError(
+                    "The Supply server returned an invalid response."
+                );
 
-        let transactionId =
-            result.data &&
-            result.data.transactionId
-                ? result.data.transactionId
-                : "Not returned";
+                return;
 
-        let item =
-            result.data &&
-            result.data.item
-                ? result.data.item
-                : currentItem;
+            }
 
-        showSuccess(
+            if (
+                !result.success &&
+                result.data &&
+                result.data.requiresConfirmation
+            ) {
 
-            "✓ Item Issued",
+                showDuplicateWarning(
+                    result.message ||
+                    "The server requires confirmation.",
+                    function() {
 
-            (result.message ||
-                "The item was successfully issued.") +
+                        issueItem(true);
 
-            "<br><br>" +
+                    }
+                );
 
-            "<strong>" +
-            escapeHtml(
-                item.itemName
-            ) +
-            " — " +
-            escapeHtml(
-                item.size
-            ) +
-            "</strong>" +
+                return;
 
-            "<br><br>" +
+            }
 
-            "Transaction: " +
-            escapeHtml(
-                transactionId
-            )
+            if (!result.success) {
 
-        );
+                showError(
+                    result.message ||
+                    "The issue could not be completed."
+                );
 
-    })
+                return;
 
-    .catch(function (error) {
+            }
 
-        requestInProgress = false;
+            const item =
+                result.data &&
+                result.data.item
+                    ? result.data.item
+                    : currentItem;
 
-        console.error(
-            "ISSUE ERROR:",
-            error
-        );
+            showSuccess(
 
-        showError(
-            "The issue request failed before a valid response was received.",
-            error
-        );
+                "✓ Item Issued",
 
-    });
+                (
+                    result.message ||
+                    "Item successfully issued."
+                ) +
+
+                "<br><br>" +
+
+                "<strong>" +
+
+                escapeHtml(
+                    item.itemName || ""
+                ) +
+
+                " — " +
+
+                escapeHtml(
+                    item.size || ""
+                ) +
+
+                "</strong>" +
+
+                "<br><br>" +
+
+                "Transaction: " +
+
+                escapeHtml(
+                    result.data &&
+                    result.data.transactionId
+                        ? result.data.transactionId
+                        : "Recorded"
+                )
+
+            );
+
+        })
+
+        .catch(function(error) {
+
+            requestInProgress = false;
+
+            console.error(
+                "ISSUE REQUEST FAILED:",
+                error
+            );
+
+            showError(
+                "Issue failed: " +
+                error.message
+            );
+
+        });
 
 }
 
 
 /* =========================================================
-   RETURN
+   RETURN ITEM
    ========================================================= */
 
 function returnItem(force) {
 
+    console.log(
+        "=== RETURN START ==="
+    );
+
     if (!currentStudent) {
 
-        showError("No student selected.");
+        showError(
+            "No student is currently selected."
+        );
 
         return;
 
@@ -1561,134 +1907,189 @@ function returnItem(force) {
 
     if (!currentItem) {
 
-        showError("No item selected.");
+        showError(
+            "No item is currently selected."
+        );
 
         return;
 
     }
 
-    const clerk =
-        saveClerk();
+    const barcode =
+        getItemBarcode();
+
+    console.log(
+        "Student ID:",
+        currentStudent.id
+    );
+
+    console.log(
+        "Item object:",
+        currentItem
+    );
+
+    console.log(
+        "Barcode being submitted:",
+        barcode
+    );
+
+    if (!barcode) {
+
+        showError(
+            "The selected item does not contain a usable barcode."
+        );
+
+        return;
+
+    }
+
+    requestInProgress = true;
 
     showLoading(
         "Processing return..."
     );
 
-    requestInProgress = true;
-
-    postData({
+    const requestData = {
 
         action: "return",
 
         studentId:
-            currentStudent.id,
+            String(
+                currentStudent.id
+            ),
 
         itemBarcode:
-            currentItem.barcode,
+            String(barcode),
 
         clerk:
-            clerk,
+            saveClerk(),
 
         force:
             force === true
 
-    })
+    };
 
-    .then(function (result) {
+    console.log(
+        "Sending return request:",
+        requestData
+    );
 
-        requestInProgress = false;
+    postData(requestData)
 
-        console.log(
-            "RETURN RESPONSE:",
-            result
-        );
+        .then(function(result) {
 
-        if (
-            !result.success &&
-            result.data &&
-            result.data.requiresConfirmation
-        ) {
+            requestInProgress = false;
 
-            showReturnWarning(
-                result.message,
-                function () {
-                    returnItem(true);
-                }
-            );
-
-            return;
-
-        }
-
-        if (!result.success) {
-
-            showError(
-                result.message ||
-                "The return transaction failed.",
+            console.log(
+                "RETURN SERVER RESPONSE:",
                 result
             );
 
-            return;
+            if (
+                !result ||
+                typeof result !== "object"
+            ) {
 
-        }
+                showError(
+                    "The Supply server returned an invalid response."
+                );
 
-        let transactionId =
-            result.data &&
-            result.data.transactionId
-                ? result.data.transactionId
-                : "Not returned";
+                return;
 
-        let item =
-            result.data &&
-            result.data.item
-                ? result.data.item
-                : currentItem;
+            }
 
-        showSuccess(
+            if (
+                !result.success &&
+                result.data &&
+                result.data.requiresConfirmation
+            ) {
 
-            "✓ Item Returned",
+                showReturnWarning(
+                    result.message ||
+                    "The server requires confirmation.",
+                    function() {
 
-            (result.message ||
-                "The item was successfully returned.") +
+                        returnItem(true);
 
-            "<br><br>" +
+                    }
+                );
 
-            "<strong>" +
-            escapeHtml(
-                item.itemName
-            ) +
-            " — " +
-            escapeHtml(
-                item.size
-            ) +
-            "</strong>" +
+                return;
 
-            "<br><br>" +
+            }
 
-            "Transaction: " +
-            escapeHtml(
-                transactionId
-            )
+            if (!result.success) {
 
-        );
+                showError(
+                    result.message ||
+                    "The return could not be completed."
+                );
 
-    })
+                return;
 
-    .catch(function (error) {
+            }
 
-        requestInProgress = false;
+            const item =
+                result.data &&
+                result.data.item
+                    ? result.data.item
+                    : currentItem;
 
-        console.error(
-            "RETURN ERROR:",
-            error
-        );
+            showSuccess(
 
-        showError(
-            "The return request failed before a valid response was received.",
-            error
-        );
+                "✓ Item Returned",
 
-    });
+                (
+                    result.message ||
+                    "Item successfully returned."
+                ) +
+
+                "<br><br>" +
+
+                "<strong>" +
+
+                escapeHtml(
+                    item.itemName || ""
+                ) +
+
+                " — " +
+
+                escapeHtml(
+                    item.size || ""
+                ) +
+
+                "</strong>" +
+
+                "<br><br>" +
+
+                "Transaction: " +
+
+                escapeHtml(
+                    result.data &&
+                    result.data.transactionId
+                        ? result.data.transactionId
+                        : "Recorded"
+                )
+
+            );
+
+        })
+
+        .catch(function(error) {
+
+            requestInProgress = false;
+
+            console.error(
+                "RETURN REQUEST FAILED:",
+                error
+            );
+
+            showError(
+                "Return failed: " +
+                error.message
+            );
+
+        });
 
 }
 
@@ -1708,7 +2109,9 @@ function exchangeItems(force) {
 
     if (!currentStudent) {
 
-        showError("No student selected.");
+        showError(
+            "No student is selected."
+        );
 
         return;
 
@@ -1717,156 +2120,212 @@ function exchangeItems(force) {
     if (!oldItem || !newItem) {
 
         showError(
-            "Both the old and new items must be selected."
+            "Both the old and new items are required."
         );
 
         return;
 
     }
 
-    const clerk =
-        saveClerk();
+    const oldBarcode =
+        oldItem.barcode ||
+        oldItem.itemBarcode ||
+        oldItem.itemCode;
+
+    const newBarcode =
+        newItem.barcode ||
+        newItem.itemBarcode ||
+        newItem.itemCode;
+
+    if (!oldBarcode || !newBarcode) {
+
+        showError(
+            "One of the exchange items does not contain a usable barcode."
+        );
+
+        return;
+
+    }
+
+    requestInProgress = true;
 
     showLoading(
         "Processing exchange..."
     );
 
-    requestInProgress = true;
-
-    postData({
+    const requestData = {
 
         action: "exchange",
 
         studentId:
-            currentStudent.id,
+            String(
+                currentStudent.id
+            ),
 
         oldItemBarcode:
-            oldItem.barcode,
+            String(oldBarcode),
 
         newItemBarcode:
-            newItem.barcode,
+            String(newBarcode),
 
         clerk:
-            clerk,
+            saveClerk(),
 
         force:
             force === true
 
-    })
+    };
 
-    .then(function (result) {
+    console.log(
+        "Sending exchange request:",
+        requestData
+    );
 
-        requestInProgress = false;
+    postData(requestData)
 
-        console.log(
-            "EXCHANGE RESPONSE:",
-            result
-        );
+        .then(function(result) {
 
-        if (
-            !result.success &&
-            result.data &&
-            result.data.requiresConfirmation
-        ) {
+            requestInProgress = false;
 
-            showDuplicateWarning(
-                result.message,
-                function () {
-                    exchangeItems(true);
-                }
-            );
-
-            return;
-
-        }
-
-        if (!result.success) {
-
-            showError(
-                result.message ||
-                "The exchange transaction failed.",
+            console.log(
+                "EXCHANGE SERVER RESPONSE:",
                 result
             );
 
-            return;
+            if (
+                !result ||
+                typeof result !== "object"
+            ) {
 
-        }
+                showError(
+                    "The Supply server returned an invalid response."
+                );
 
-        const oldTransaction =
-            result.data &&
-            result.data.returnTransactionId
-                ? result.data.returnTransactionId
-                : "Not returned";
+                return;
 
-        const newTransaction =
-            result.data &&
-            result.data.issueTransactionId
-                ? result.data.issueTransactionId
-                : "Not returned";
+            }
 
-        showSuccess(
+            if (
+                !result.success &&
+                result.data &&
+                result.data.requiresConfirmation
+            ) {
 
-            "✓ Exchange Complete",
+                showDuplicateWarning(
+                    result.message,
+                    function() {
 
-            "Returned:<br>" +
+                        exchangeItems(true);
 
-            "<strong>" +
-            escapeHtml(
-                oldItem.itemName
-            ) +
-            " — " +
-            escapeHtml(
-                oldItem.size
-            ) +
-            "</strong>" +
+                    }
+                );
 
-            "<br><br>" +
+                return;
 
-            "Issued:<br>" +
+            }
 
-            "<strong>" +
-            escapeHtml(
-                newItem.itemName
-            ) +
-            " — " +
-            escapeHtml(
-                newItem.size
-            ) +
-            "</strong>" +
+            if (!result.success) {
 
-            "<br><br>" +
+                showError(
+                    result.message ||
+                    "The exchange could not be completed."
+                );
 
-            "Return Transaction: " +
-            escapeHtml(
-                oldTransaction
-            ) +
+                return;
 
-            "<br>" +
+            }
 
-            "Issue Transaction: " +
-            escapeHtml(
-                newTransaction
-            )
+            const oldDisplay =
+                result.data &&
+                result.data.oldItem
+                    ? result.data.oldItem
+                    : oldItem;
 
-        );
+            const newDisplay =
+                result.data &&
+                result.data.newItem
+                    ? result.data.newItem
+                    : newItem;
 
-    })
+            showSuccess(
 
-    .catch(function (error) {
+                "✓ Exchange Complete",
 
-        requestInProgress = false;
+                "Returned:<br>" +
 
-        console.error(
-            "EXCHANGE ERROR:",
-            error
-        );
+                "<strong>" +
 
-        showError(
-            "The exchange request failed before a valid response was received.",
-            error
-        );
+                escapeHtml(
+                    oldDisplay.itemName || ""
+                ) +
 
-    });
+                " — " +
+
+                escapeHtml(
+                    oldDisplay.size || ""
+                ) +
+
+                "</strong>" +
+
+                "<br><br>" +
+
+                "Issued:<br>" +
+
+                "<strong>" +
+
+                escapeHtml(
+                    newDisplay.itemName || ""
+                ) +
+
+                " — " +
+
+                escapeHtml(
+                    newDisplay.size || ""
+                ) +
+
+                "</strong>" +
+
+                "<br><br>" +
+
+                "Return Transaction: " +
+
+                escapeHtml(
+                    result.data &&
+                    result.data.returnTransactionId
+                        ? result.data.returnTransactionId
+                        : "Recorded"
+                ) +
+
+                "<br>" +
+
+                "Issue Transaction: " +
+
+                escapeHtml(
+                    result.data &&
+                    result.data.issueTransactionId
+                        ? result.data.issueTransactionId
+                        : "Recorded"
+                )
+
+            );
+
+        })
+
+        .catch(function(error) {
+
+            requestInProgress = false;
+
+            console.error(
+                "EXCHANGE REQUEST FAILED:",
+                error
+            );
+
+            showError(
+                "Exchange failed: " +
+                error.message
+            );
+
+        });
 
 }
 
@@ -1886,18 +2345,26 @@ function loadCadet() {
         action: "viewCadet",
 
         studentId:
-            currentStudent.id
+            String(
+                currentStudent.id
+            )
 
     })
 
-    .then(function (result) {
+    .then(function(result) {
 
-        if (!result.success) {
+        console.log(
+            "Cadet view result:",
+            result
+        );
+
+        if (!result || !result.success) {
 
             showError(
-                result.message ||
-                "Could not load cadet information.",
-                result
+                result &&
+                result.message
+                    ? result.message
+                    : "Could not load cadet information."
             );
 
             return;
@@ -1908,14 +2375,25 @@ function loadCadet() {
             result.data.student;
 
         document
-            .getElementById("cadetName")
+            .getElementById(
+                "cadetName"
+            )
             .innerText =
-                safeValue(student.firstName) +
+
+                safeValue(
+                    student.firstName
+                ) +
+
                 " " +
-                safeValue(student.lastName);
+
+                safeValue(
+                    student.lastName
+                );
 
         document
-            .getElementById("cadetDetails")
+            .getElementById(
+                "cadetDetails"
+            )
             .innerText =
                 formatStudentDetails();
 
@@ -1930,22 +2408,24 @@ function loadCadet() {
         hideAllCards();
 
         document
-            .getElementById("cadetCard")
+            .getElementById(
+                "cadetCard"
+            )
             .classList
             .remove("hidden");
 
     })
 
-    .catch(function (error) {
+    .catch(function(error) {
 
         console.error(
-            "CADET ERROR:",
+            "CADET VIEW FAILED:",
             error
         );
 
         showError(
-            "Could not load cadet information.",
-            error
+            "Could not load cadet information: " +
+            error.message
         );
 
     });
@@ -1953,10 +2433,16 @@ function loadCadet() {
 }
 
 
+/* =========================================================
+   CURRENT ITEMS
+   ========================================================= */
+
 function displayCurrentItems(items) {
 
     const container =
-        document.getElementById("currentItems");
+        document.getElementById(
+            "currentItems"
+        );
 
     if (
         !items ||
@@ -1971,7 +2457,7 @@ function displayCurrentItems(items) {
     }
 
     container.innerHTML =
-        items.map(function (item) {
+        items.map(function(item) {
 
             return `
 
@@ -1995,7 +2481,9 @@ function displayCurrentItems(items) {
                     <span>
                         Barcode:
                         ${escapeHtml(
-                            item.itemBarcode
+                            item.itemBarcode ||
+                            item.barcode ||
+                            ""
                         )}
                     </span>
 
@@ -2008,10 +2496,16 @@ function displayCurrentItems(items) {
 }
 
 
+/* =========================================================
+   TRANSACTION HISTORY
+   ========================================================= */
+
 function displayHistory(history) {
 
     const container =
-        document.getElementById("history");
+        document.getElementById(
+            "history"
+        );
 
     if (
         !history ||
@@ -2026,11 +2520,11 @@ function displayHistory(history) {
     }
 
     container.innerHTML =
-        history.map(function (txn) {
+        history.map(function(txn) {
 
             const actionClass =
                 "action-" +
-                safeValue(txn.action);
+                txn.action;
 
             return `
 
@@ -2042,7 +2536,8 @@ function displayHistory(history) {
                         )}
                     </strong>
 
-                    <span class="${actionClass}">
+                    <span
+                        class="${actionClass}">
                         ${escapeHtml(
                             txn.action
                         )}
@@ -2086,52 +2581,44 @@ function displayHistory(history) {
 
 
 /* =========================================================
-   SCANNER
+   CAMERA SCANNER
    ========================================================= */
 
 function showScanner(title) {
 
     hideAllCards();
 
-    const card =
-        document.getElementById("scannerCard");
-
-    card.classList.remove("hidden");
+    document
+        .getElementById(
+            "scannerCard"
+        )
+        .classList
+        .remove("hidden");
 
     document
-        .getElementById("scannerTitle")
-        .innerText = title;
+        .getElementById(
+            "scannerTitle"
+        )
+        .innerText =
+            title;
 
-    document
-        .getElementById("reader")
-        .innerHTML = "";
-
-    try {
-
-        scanner =
-            new Html5Qrcode("reader");
-
-    }
-    catch (error) {
-
-        console.error(
-            "Scanner creation error:",
-            error
+    const reader =
+        document.getElementById(
+            "reader"
         );
 
-        showError(
-            "The barcode scanner could not be initialized.",
-            error
+    reader.innerHTML = "";
+
+    scanner =
+        new Html5Qrcode(
+            "reader"
         );
-
-        return;
-
-    }
 
     scanner.start(
 
         {
-            facingMode: "environment"
+            facingMode:
+                "environment"
         },
 
         {
@@ -2144,7 +2631,12 @@ function showScanner(title) {
 
         },
 
-        function (decodedText) {
+        function(decodedText) {
+
+            console.log(
+                "Barcode scanned:",
+                decodedText
+            );
 
             stopScanner();
 
@@ -2154,29 +2646,25 @@ function showScanner(title) {
 
         },
 
-        function (errorMessage) {
+        function(errorMessage) {
 
-            /*
-             * Scanner continuously reports
-             * decoding failures while searching.
-             * These are intentionally ignored.
-             */
+            // Scanner continuously reports
+            // failed frames. These are ignored.
 
         }
 
     )
-    .catch(function (error) {
+
+    .catch(function(error) {
 
         console.error(
-            "Camera error:",
+            "CAMERA START FAILED:",
             error
         );
 
-        scanner = null;
-
         showError(
-            "Camera could not start. Make sure the browser has permission to use the camera.",
-            error
+            "Camera could not start. " +
+            "Make sure the browser has permission to use the camera."
         );
 
     });
@@ -2184,14 +2672,13 @@ function showScanner(title) {
 }
 
 
+/* =========================================================
+   STOP SCANNER
+   ========================================================= */
+
 function stopScanner() {
 
     if (!scanner) {
-
-        document
-            .getElementById("scannerCard")
-            .classList
-            .add("hidden");
 
         return;
 
@@ -2202,43 +2689,51 @@ function stopScanner() {
 
     scanner = null;
 
-    activeScanner.stop()
+    activeScanner
+        .stop()
 
-        .then(function () {
+        .then(function() {
 
             try {
+
                 activeScanner.clear();
+
             }
-            catch (error) {
+
+            catch (e) {
+
                 console.warn(
-                    "Scanner clear error:",
-                    error
+                    "Scanner clear warning:",
+                    e
                 );
+
             }
 
         })
 
-        .catch(function (error) {
+        .catch(function(error) {
 
             console.warn(
-                "Scanner stop error:",
+                "Scanner stop warning:",
                 error
             );
 
             try {
+
                 activeScanner.clear();
+
             }
-            catch (clearError) {}
+
+            catch (e) {}
 
         });
 
-    document
-        .getElementById("scannerCard")
-        .classList
-        .add("hidden");
-
 }
 
+
+/* =========================================================
+   HANDLE BARCODE
+   ========================================================= */
 
 function handleBarcode(barcode) {
 
@@ -2256,11 +2751,13 @@ function handleBarcode(barcode) {
     }
 
     console.log(
-        "SCANNED BARCODE:",
+        "Handling barcode:",
         barcode
     );
 
-    if (scannerMode === "student") {
+    if (
+        scannerMode === "student"
+    ) {
 
         lookupStudent(barcode);
 
@@ -2268,7 +2765,9 @@ function handleBarcode(barcode) {
 
     }
 
-    if (scannerMode === "item") {
+    if (
+        scannerMode === "item"
+    ) {
 
         lookupItem(barcode);
 
@@ -2290,7 +2789,9 @@ function handleBarcode(barcode) {
 function submitManualEntry() {
 
     const input =
-        document.getElementById("manualInput");
+        document.getElementById(
+            "manualInput"
+        );
 
     const value =
         input.value.trim();
@@ -2307,10 +2808,10 @@ function submitManualEntry() {
 
     }
 
-    /*
-     * If no student exists yet,
-     * the manual entry is the student ID.
-     */
+    console.log(
+        "Manual entry:",
+        value
+    );
 
     if (!currentStudent) {
 
@@ -2319,10 +2820,6 @@ function submitManualEntry() {
         return;
 
     }
-
-    /*
-     * Otherwise it is an item barcode.
-     */
 
     lookupItem(value);
 
@@ -2336,8 +2833,25 @@ function submitManualEntry() {
 function postData(data) {
 
     console.log(
-        "API REQUEST:",
+        "================================"
+    );
+
+    console.log(
+        "API REQUEST"
+    );
+
+    console.log(
+        "URL:",
+        APPS_SCRIPT_URL
+    );
+
+    console.log(
+        "Payload:",
         data
+    );
+
+    console.log(
+        "================================"
     );
 
     return fetch(
@@ -2346,11 +2860,14 @@ function postData(data) {
 
         {
 
-            method: "POST",
+            method:
+                "POST",
 
             headers: {
+
                 "Content-Type":
                     "text/plain;charset=utf-8"
+
             },
 
             body:
@@ -2360,20 +2877,23 @@ function postData(data) {
 
     )
 
-    .then(function (response) {
+    .then(function(response) {
 
         console.log(
             "HTTP STATUS:",
             response.status
         );
 
+        console.log(
+            "HTTP OK:",
+            response.ok
+        );
+
         if (!response.ok) {
 
             throw new Error(
                 "HTTP " +
-                response.status +
-                " " +
-                response.statusText
+                response.status
             );
 
         }
@@ -2382,10 +2902,10 @@ function postData(data) {
 
     })
 
-    .then(function (text) {
+    .then(function(text) {
 
         console.log(
-            "RAW API RESPONSE:",
+            "RAW SERVER RESPONSE:",
             text
         );
 
@@ -2405,15 +2925,24 @@ function postData(data) {
                 JSON.parse(text);
 
         }
+
         catch (error) {
 
-            throw new Error(
-                "The server did not return valid JSON.\n\n" +
-                "Raw response:\n" +
+            console.error(
+                "INVALID JSON:",
                 text
             );
 
+            throw new Error(
+                "The Supply server returned invalid JSON."
+            );
+
         }
+
+        console.log(
+            "PARSED SERVER RESPONSE:",
+            result
+        );
 
         return result;
 
@@ -2423,7 +2952,7 @@ function postData(data) {
 
 
 /* =========================================================
-   UI HELPERS
+   UI
    ========================================================= */
 
 function hideAllCards() {
@@ -2444,7 +2973,7 @@ function hideAllCards() {
 
     ];
 
-    ids.forEach(function (id) {
+    ids.forEach(function(id) {
 
         const element =
             document.getElementById(id);
@@ -2462,32 +2991,44 @@ function hideAllCards() {
 }
 
 
+/* =========================================================
+   LOADING
+   ========================================================= */
+
 function showLoading(message) {
 
     hideAllCards();
 
     const card =
-        document.getElementById("statusCard");
+        document.getElementById(
+            "statusCard"
+        );
 
-    card.classList.remove("hidden");
+    card.classList.remove(
+        "hidden"
+    );
 
     document
-        .getElementById("statusTitle")
+        .getElementById(
+            "statusTitle"
+        )
         .innerText =
             "Please Wait";
 
-    const status =
+    const messageBox =
         document.getElementById(
             "statusMessage"
         );
 
-    status.className =
-        "status info";
+    messageBox.className =
+        "status";
 
-    status.innerHTML = `
+    messageBox.innerHTML = `
 
         <div class="loading">
+
             ${escapeHtml(message)}
+
         </div>
 
     `;
@@ -2495,100 +3036,90 @@ function showLoading(message) {
 }
 
 
-function showSuccess(title, message) {
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+function showSuccess(
+    title,
+    message
+) {
 
     hideAllCards();
 
-    const card =
-        document.getElementById("statusCard");
-
-    card.classList.remove("hidden");
+    document
+        .getElementById(
+            "statusCard"
+        )
+        .classList
+        .remove("hidden");
 
     document
-        .getElementById("statusTitle")
+        .getElementById(
+            "statusTitle"
+        )
         .innerText =
             title;
 
-    const status =
-        document.getElementById(
+    document
+        .getElementById(
             "statusMessage"
-        );
+        )
+        .className =
+            "status success";
 
-    status.className =
-        "status success";
-
-    status.innerHTML =
-        message;
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .innerHTML =
+            message;
 
 }
 
 
-function showError(message, debugData) {
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+function showError(message) {
 
     hideAllCards();
 
-    const card =
-        document.getElementById("statusCard");
-
-    card.classList.remove("hidden");
+    document
+        .getElementById(
+            "statusCard"
+        )
+        .classList
+        .remove("hidden");
 
     document
-        .getElementById("statusTitle")
+        .getElementById(
+            "statusTitle"
+        )
         .innerText =
             "⚠ Error";
 
-    const status =
-        document.getElementById(
+    document
+        .getElementById(
             "statusMessage"
-        );
+        )
+        .className =
+            "status error";
 
-    status.className =
-        "status error";
-
-    status.innerHTML =
-        escapeHtml(message);
-
-    /*
-     * Show technical information only
-     * when debugging data exists.
-     */
-
-    if (debugData) {
-
-        const debug =
-            document.createElement("div");
-
-        debug.className =
-            "debug-box";
-
-        let text;
-
-        try {
-
-            text =
-                JSON.stringify(
-                    debugData,
-                    null,
-                    2
-                );
-
-        }
-        catch (error) {
-
-            text =
-                String(debugData);
-
-        }
-
-        debug.innerText =
-            text;
-
-        status.appendChild(debug);
-
-    }
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .innerText =
+            message;
 
 }
 
+
+/* =========================================================
+   DUPLICATE WARNING
+   ========================================================= */
 
 function showDuplicateWarning(
     message,
@@ -2598,42 +3129,63 @@ function showDuplicateWarning(
     hideAllCards();
 
     const card =
-        document.getElementById("statusCard");
+        document.getElementById(
+            "statusCard"
+        );
 
-    card.classList.remove("hidden");
+    card.classList.remove(
+        "hidden"
+    );
 
     document
-        .getElementById("statusTitle")
+        .getElementById(
+            "statusTitle"
+        )
         .innerText =
             "⚠ Duplicate / Conflict";
 
-    const status =
-        document.getElementById(
+    document
+        .getElementById(
             "statusMessage"
+        )
+        .className =
+            "status warning";
+
+    document
+        .getElementById(
+            "statusMessage"
+        )
+        .innerText =
+            message;
+
+    const button =
+        document.createElement(
+            "button"
         );
 
-    status.className =
-        "status warning";
-
-    status.innerText =
-        message;
-
-    const proceed =
-        document.createElement("button");
-
-    proceed.className =
+    button.className =
         "warning";
 
-    proceed.innerText =
+    button.innerText =
         "Proceed Anyway";
 
-    proceed.onclick =
-        confirmFunction;
+    button.onclick =
+        function() {
 
-    card.appendChild(proceed);
+            button.disabled = true;
+
+            confirmFunction();
+
+        };
+
+    card.appendChild(
+        button
+    );
 
     const cancel =
-        document.createElement("button");
+        document.createElement(
+            "button"
+        );
 
     cancel.className =
         "secondary";
@@ -2644,10 +3196,16 @@ function showDuplicateWarning(
     cancel.onclick =
         resetApp;
 
-    card.appendChild(cancel);
+    card.appendChild(
+        cancel
+    );
 
 }
 
+
+/* =========================================================
+   RETURN WARNING
+   ========================================================= */
 
 function showReturnWarning(
     message,
@@ -2668,31 +3226,21 @@ function showReturnWarning(
 
 function resetApp() {
 
-    try {
-        stopScanner();
-    }
-    catch (error) {
-        console.warn(
-            "Scanner reset error:",
-            error
-        );
-    }
+    stopScanner();
 
     currentStudent = null;
+
     currentItem = null;
 
     oldItem = null;
+
     newItem = null;
 
     currentMode = null;
+
     scannerMode = null;
 
     requestInProgress = false;
-
-    /*
-     * Reloading restores the original
-     * home menu and clerk field.
-     */
 
     location.reload();
 
@@ -2700,7 +3248,7 @@ function resetApp() {
 
 
 /* =========================================================
-   UTILITY FUNCTIONS
+   SAFE VALUE
    ========================================================= */
 
 function safeValue(value) {
@@ -2719,23 +3267,44 @@ function safeValue(value) {
 }
 
 
+/* =========================================================
+   HTML ESCAPING
+   ========================================================= */
+
 function escapeHtml(value) {
 
     return String(value)
 
-        .replace(/&/g, "&amp;")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-        .replace(/</g, "&lt;")
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-        .replace(/>/g, "&gt;")
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-        .replace(/"/g, "&quot;")
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-        .replace(/'/g, "&#039;");
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
+
 
 </script>
 
 </body>
+
 </html>
