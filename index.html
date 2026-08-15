@@ -1,936 +1,4 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>PVHS NJROTC Supply</title>
-
-<script
-src="https://unpkg.com/html5-qrcode"
-type="text/javascript">
-</script>
-
-
-<style>
-
-* {
-    box-sizing: border-box;
-}
-
-
-body {
-
-    margin: 0;
-
-    padding: 15px;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background: #f1f3f5;
-
-    color: #222;
-
-}
-
-
-.container {
-
-    max-width: 520px;
-
-    margin: auto;
-
-}
-
-
-.header {
-
-    background: #111;
-
-    color: white;
-
-    padding: 22px;
-
-    text-align: center;
-
-    border-radius: 14px;
-
-    margin-bottom: 15px;
-
-}
-
-
-.header h1 {
-
-    margin: 0 0 5px 0;
-
-    font-size: 25px;
-
-}
-
-
-.header div {
-
-    font-size: 14px;
-
-    opacity: 0.8;
-
-}
-
-
-.card {
-
-    background: white;
-
-    padding: 20px;
-
-    margin-bottom: 15px;
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 2px 8px rgba(0,0,0,0.08);
-
-}
-
-
-.hidden {
-
-    display: none !important;
-
-}
-
-
-h2 {
-
-    margin-top: 0;
-
-}
-
-
-button {
-
-    width: 100%;
-
-    padding: 15px;
-
-    margin-top: 10px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    background: #222;
-
-    color: white;
-
-    font-size: 17px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-}
-
-
-button.secondary {
-
-    background: #777;
-
-}
-
-
-button.success {
-
-    background: #087f23;
-
-}
-
-
-button.warning {
-
-    background: #b06b00;
-
-}
-
-
-button.danger {
-
-    background: #9c0000;
-
-}
-
-
-input,
-select {
-
-    width: 100%;
-
-    padding: 14px;
-
-    margin-top: 7px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 8px;
-
-    font-size: 17px;
-
-}
-
-
-label {
-
-    display: block;
-
-    margin-top: 12px;
-
-    font-weight: bold;
-
-}
-
-
-.student-name {
-
-    font-size: 26px;
-
-    font-weight: bold;
-
-    margin-bottom: 10px;
-
-}
-
-
-.item-name {
-
-    font-size: 22px;
-
-    font-weight: bold;
-
-    margin-bottom: 10px;
-
-}
-
-
-.status {
-
-    padding: 15px;
-
-    margin-top: 15px;
-
-    border-radius: 9px;
-
-    background: #eee;
-
-    line-height: 1.5;
-
-}
-
-
-.status.success {
-
-    background: #dff4e4;
-
-    color: #155724;
-
-}
-
-
-.status.error {
-
-    background: #f8d7da;
-
-    color: #721c24;
-
-}
-
-
-.status.warning {
-
-    background: #fff3cd;
-
-    color: #856404;
-
-}
-
-
-.menu-button {
-
-    padding: 20px;
-
-    font-size: 18px;
-
-}
-
-
-.scan-button {
-
-    font-size: 18px;
-
-}
-
-
-.back-button {
-
-    margin-top: 20px;
-
-}
-
-
-#reader {
-
-    width: 100%;
-
-    margin-top: 15px;
-
-}
-
-
-.item-row {
-
-    padding: 13px;
-
-    border-bottom: 1px solid #ddd;
-
-}
-
-
-.item-row:last-child {
-
-    border-bottom: none;
-
-}
-
-
-.item-row strong {
-
-    display: block;
-
-    font-size: 17px;
-
-}
-
-
-.history-row {
-
-    padding: 12px;
-
-    border-bottom: 1px solid #ddd;
-
-    font-size: 14px;
-
-}
-
-
-.history-row:last-child {
-
-    border-bottom: none;
-
-}
-
-
-.action-ISSUE {
-
-    color: #087f23;
-
-    font-weight: bold;
-
-}
-
-
-.action-RETURN {
-
-    color: #9c0000;
-
-    font-weight: bold;
-
-}
-
-
-.small {
-
-    font-size: 13px;
-
-    color: #666;
-
-}
-
-
-.loading {
-
-    text-align: center;
-
-    padding: 20px;
-
-    font-size: 18px;
-
-}
-
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<div class="container">
-
-
-    <!-- HEADER -->
-
-    <div class="header">
-
-        <h1>PVHS NJROTC</h1>
-
-        <div>SUPPLY MANAGEMENT PROTOTYPE — v0.2</div>
-
-    </div>
-
-
-
-    <!-- =========================
-         MAIN MENU
-         ========================= -->
-
-    <div id="home"
-         class="card">
-
-        <h2>Supply Operations</h2>
-
-
-        <button
-            class="menu-button"
-            onclick="startIssue()">
-
-            📦 ISSUE ITEM
-
-        </button>
-
-
-        <button
-            class="menu-button"
-            onclick="startReturn()">
-
-            ↩️ RETURN ITEM
-
-        </button>
-
-
-        <button
-            class="menu-button"
-            onclick="startExchange()">
-
-            🔄 EXCHANGE ITEM
-
-        </button>
-
-
-        <button
-            class="menu-button"
-            onclick="startViewCadet()">
-
-            👤 VIEW CADET
-
-        </button>
-
-
-        <label for="clerkName">
-
-            Supply Clerk
-
-        </label>
-
-
-        <input
-            id="clerkName"
-            type="text"
-            placeholder="Enter clerk name">
-
-
-        <p class="small">
-
-            Your clerk name will be attached
-            to transactions created during
-            this session.
-
-        </p>
-
-    </div>
-
-
-
-    <!-- =========================
-         STUDENT CARD
-         ========================= -->
-
-    <div id="studentCard"
-         class="card hidden">
-
-        <h2>Student</h2>
-
-
-        <div id="studentName"
-             class="student-name">
-        </div>
-
-
-        <div id="studentDetails">
-        </div>
-
-
-        <button
-            onclick="startItemScan()">
-
-            📷 Scan Item Barcode
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="manualItem()">
-
-            ⌨️ Enter Item Barcode
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="resetApp()">
-
-            Cancel
-
-        </button>
-
-    </div>
-
-
-
-    <!-- =========================
-         RETURN STUDENT CARD
-         ========================= -->
-
-    <div id="returnStudentCard"
-         class="card hidden">
-
-        <h2>Return Item</h2>
-
-
-        <div id="returnStudentName"
-             class="student-name">
-        </div>
-
-
-        <div id="returnStudentDetails">
-        </div>
-
-
-        <button
-            onclick="startItemScan()">
-
-            📷 Scan Item to Return
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="manualItem()">
-
-            ⌨️ Enter Item Barcode
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="resetApp()">
-
-            Cancel
-
-        </button>
-
-    </div>
-
-
-
-    <!-- =========================
-         EXCHANGE CARD
-         ========================= -->
-
-    <div id="exchangeStudentCard"
-         class="card hidden">
-
-        <h2>Exchange Item</h2>
-
-
-        <div id="exchangeStudentName"
-             class="student-name">
-        </div>
-
-
-        <div id="exchangeStudentDetails">
-        </div>
-
-
-        <p>
-
-            First scan or enter the item
-            being returned.
-
-        </p>
-
-
-        <button
-            onclick="startItemScan()">
-
-            📷 Scan Old Item
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="manualItem()">
-
-            ⌨️ Enter Old Item Barcode
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="resetApp()">
-
-            Cancel
-
-        </button>
-
-    </div>
-
-
-
-    <!-- =========================
-         ITEM CARD
-         ========================= -->
-
-    <div id="itemCard"
-         class="card hidden">
-
-        <h2 id="itemActionTitle">
-            Item
-        </h2>
-
-
-        <div id="itemName"
-             class="item-name">
-        </div>
-
-
-        <div id="itemDetails">
-        </div>
-
-
-        <button
-            class="success"
-            onclick="confirmPrimaryAction()">
-
-            Confirm
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="resetApp()">
-
-            Cancel
-
-        </button>
-
-    </div>
-
-
-
-    <!-- =========================
-         EXCHANGE OLD ITEM CARD
-         ========================= -->
-
-    <div id="exchangeOldItemCard"
-         class="card hidden">
-
-        <h2>Old Item</h2>
-
-
-        <div id="oldItemName"
-             class="item-name">
-        </div>
-
-
-        <div id="oldItemDetails">
-        </div>
-
-
-        <p>
-
-            Now scan the replacement item.
-
-        </p>
-
-
-        <button
-            onclick="startItemScan()">
-
-            📷 Scan New Item
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="manualItem()">
-
-            ⌨️ Enter New Item Barcode
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="resetApp()">
-
-            Cancel
-
-        </button>
-
-    </div>
-
-
-
-    <!-- =========================
-         EXCHANGE CONFIRMATION
-         ========================= -->
-
-    <div id="exchangeConfirmCard"
-         class="card hidden">
-
-        <h2>Confirm Exchange</h2>
-
-
-        <p>
-
-            <strong>Returning:</strong>
-
-        </p>
-
-
-        <div id="exchangeOldDisplay"
-             class="item-name">
-        </div>
-
-
-        <hr>
-
-
-        <p>
-
-            <strong>Issuing:</strong>
-
-        </p>
-
-
-        <div id="exchangeNewDisplay"
-             class="item-name">
-        </div>
-
-
-        <button
-            class="success"
-            onclick="confirmExchange()">
-
-            ✓ Confirm Exchange
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="resetApp()">
-
-            Cancel
-
-        </button>
-
-    </div>
-
-
-
-    <!-- =========================
-         CADET VIEW
-         ========================= -->
-
-    <div id="cadetCard"
-         class="card hidden">
-
-        <h2>Cadet Information</h2>
-
-
-        <div id="cadetName"
-             class="student-name">
-        </div>
-
-
-        <div id="cadetDetails">
-        </div>
-
-
-        <hr>
-
-
-        <h3>Currently Issued</h3>
-
-
-        <div id="currentItems">
-        </div>
-
-
-        <hr>
-
-
-        <h3>Transaction History</h3>
-
-
-        <div id="history">
-        </div>
-
-
-        <button
-            class="secondary"
-            onclick="resetApp()">
-
-            Back to Menu
-
-        </button>
-
-    </div>
-
-
-
-    <!-- =========================
-         SCANNER
-         ========================= -->
-
-    <div id="scannerCard"
-         class="card hidden">
-
-        <h2 id="scannerTitle">
-
-            Scan
-
-        </h2>
-
-
-        <div id="reader"></div>
-
-
-        <button
-            class="secondary"
-            onclick="stopScanner()">
-
-            Cancel Scan
-
-        </button>
-
-    </div>
-
-
-
-    <!-- =========================
-         MANUAL ENTRY
-         ========================= -->
-
-    <div id="manualCard"
-         class="card hidden">
-
-        <h2 id="manualTitle">
-
-            Manual Entry
-
-        </h2>
-
-
-        <input
-            id="manualInput"
-            type="text"
-            inputmode="numeric"
-            autocomplete="off"
-            placeholder="Enter barcode">
-
-
-        <button
-            class="success"
-            onclick="submitManualEntry()">
-
-            Look Up
-
-        </button>
-
-
-        <button
-            class="secondary"
-            onclick="resetApp()">
-
-            Cancel
-
-        </button>
-
-    </div>
-
-
-
-    <!-- =========================
-         STATUS
-         ========================= -->
-
-    <div id="statusCard"
-         class="card hidden">
-
-        <h2 id="statusTitle">
-        </h2>
-
-
-        <div id="statusMessage"
-             class="status">
-        </div>
-
-
-        <button
-            onclick="resetApp()">
-
-            Return to Menu
-
-        </button>
-
-    </div>
-
-
-</div>
-
-
-
 <script>
-
 
 /* =========================================================
    CONFIGURATION
@@ -945,17 +13,13 @@ const APPS_SCRIPT_URL =
    ========================================================= */
 
 let currentStudent = null;
-
 let currentItem = null;
-
 let oldItem = null;
-
 let newItem = null;
 
 let currentMode = null;
 
 let scanner = null;
-
 let scannerMode = null;
 
 
@@ -965,10 +29,8 @@ let scannerMode = null;
 
 document.addEventListener(
     "DOMContentLoaded",
-    function() {
-
+    function () {
         loadClerk();
-
     }
 );
 
@@ -999,7 +61,6 @@ function saveClerk() {
             .value
             .trim();
 
-
     if (clerk) {
 
         localStorage.setItem(
@@ -1009,9 +70,7 @@ function saveClerk() {
 
     }
 
-
     return clerk || "Unknown Clerk";
-
 }
 
 
@@ -1024,7 +83,6 @@ function startIssue() {
     currentMode = "issue";
 
     startStudentInput();
-
 }
 
 
@@ -1033,7 +91,6 @@ function startReturn() {
     currentMode = "return";
 
     startStudentInput();
-
 }
 
 
@@ -1042,7 +99,6 @@ function startExchange() {
     currentMode = "exchange";
 
     startStudentInput();
-
 }
 
 
@@ -1051,7 +107,6 @@ function startViewCadet() {
     currentMode = "view";
 
     startStudentInput();
-
 }
 
 
@@ -1063,65 +118,45 @@ function startStudentInput() {
 
     hideAllCards();
 
-
     showStudentInput();
-
 }
 
 
 function showStudentInput() {
 
     const card =
-        document.getElementById(
-            "home"
-        );
-
-
-    /*
-     * Use a temporary student input screen.
-     */
+        document.getElementById("home");
 
     const html = `
 
-        <h2>
-            ${getModeTitle()}
-        </h2>
+        <h2>${getModeTitle()}</h2>
 
         <p>
             Scan the student's school ID
             or enter the ID manually.
         </p>
 
-        <button
-            onclick="startStudentScan()">
-
+        <button onclick="startStudentScan()">
             📷 Scan Student ID
-
         </button>
 
         <button
             class="secondary"
             onclick="manualStudent()">
-
             ⌨️ Enter Student ID
-
         </button>
 
         <button
             class="secondary"
             onclick="resetApp()">
-
             Cancel
-
         </button>
 
     `;
 
-
     card.innerHTML = html;
 
     card.classList.remove("hidden");
-
 }
 
 
@@ -1140,7 +175,6 @@ function getModeTitle() {
         return "View Cadet";
 
     return "Supply";
-
 }
 
 
@@ -1152,10 +186,7 @@ function startStudentScan() {
 
     scannerMode = "student";
 
-    showScanner(
-        "Scan Student ID"
-    );
-
+    showScanner("Scan Student ID");
 }
 
 
@@ -1168,85 +199,92 @@ function manualStudent() {
         .classList
         .remove("hidden");
 
-
     document
         .getElementById("manualTitle")
         .innerText =
             "Enter Student ID";
 
-
     const input =
-        document.getElementById(
-            "manualInput"
-        );
-
+        document.getElementById("manualInput");
 
     input.value = "";
 
     input.placeholder =
         "Enter Student ID";
 
-
     input.focus();
-
 }
 
 
 function lookupStudent(studentId) {
 
-    showLoading(
-        "Finding student..."
-    );
-
+    showLoading("Finding student...");
 
     postData({
 
         action: "lookupStudent",
 
-        studentId: studentId
+        studentId: String(studentId).trim()
 
     })
 
-    .then(function(result) {
+    .then(function (result) {
+
+        console.log(
+            "lookupStudent response:",
+            result
+        );
 
         if (!result.success) {
 
             showError(
-                result.message
+                result.message ||
+                "Student could not be found."
             );
 
             return;
-
         }
 
+        if (
+            !result.data ||
+            !result.data.student
+        ) {
+
+            showError(
+                "The Supply server found the student, " +
+                "but returned incomplete student information."
+            );
+
+            return;
+        }
 
         currentStudent =
             result.data.student;
-
 
         if (currentMode === "view") {
 
             loadCadet();
 
             return;
-
         }
-
 
         showStudentConfirmation();
 
     })
 
-    .catch(function(error) {
+    .catch(function (error) {
 
-        showError(
-            "Could not contact Supply server."
+        console.error(
+            "lookupStudent error:",
+            error
         );
 
-        console.error(error);
+        showError(
+            "Could not contact Supply server.\n\n" +
+            error.message
+        );
 
     });
-
 }
 
 
@@ -1258,10 +296,7 @@ function showStudentConfirmation() {
 
     hideAllCards();
 
-
-    let cardId =
-        "studentCard";
-
+    let cardId = "studentCard";
 
     if (currentMode === "return") {
 
@@ -1279,78 +314,54 @@ function showStudentConfirmation() {
 
     }
 
-
     const card =
-        document.getElementById(
-            cardId
-        );
-
+        document.getElementById(cardId);
 
     const name =
         currentStudent.firstName +
         " " +
         currentStudent.lastName;
 
-
     if (currentMode === "issue") {
 
         document
-            .getElementById(
-                "studentName"
-            )
+            .getElementById("studentName")
             .innerText = name;
 
-
         document
-            .getElementById(
-                "studentDetails"
-            )
+            .getElementById("studentDetails")
             .innerText =
                 formatStudentDetails();
 
     }
-
 
     if (currentMode === "return") {
 
         document
-            .getElementById(
-                "returnStudentName"
-            )
+            .getElementById("returnStudentName")
             .innerText = name;
 
-
         document
-            .getElementById(
-                "returnStudentDetails"
-            )
+            .getElementById("returnStudentDetails")
             .innerText =
                 formatStudentDetails();
 
     }
-
 
     if (currentMode === "exchange") {
 
         document
-            .getElementById(
-                "exchangeStudentName"
-            )
+            .getElementById("exchangeStudentName")
             .innerText = name;
 
-
         document
-            .getElementById(
-                "exchangeStudentDetails"
-            )
+            .getElementById("exchangeStudentDetails")
             .innerText =
                 formatStudentDetails();
 
     }
 
-
     card.classList.remove("hidden");
-
 }
 
 
@@ -1374,7 +385,6 @@ function formatStudentDetails() {
         " Platoon"
 
     );
-
 }
 
 
@@ -1389,29 +399,25 @@ function startItemScan() {
     showScanner(
         getItemScanTitle()
     );
-
 }
 
 
 function getItemScanTitle() {
 
-    if (currentMode === "exchange" &&
-        oldItem) {
+    if (
+        currentMode === "exchange" &&
+        oldItem
+    ) {
 
         return "Scan New Item";
-
     }
-
 
     if (currentMode === "return") {
 
         return "Scan Item to Return";
-
     }
 
-
     return "Scan Item Barcode";
-
 }
 
 
@@ -1419,37 +425,25 @@ function manualItem() {
 
     hideAllCards();
 
-
     document
-        .getElementById(
-            "manualCard"
-        )
+        .getElementById("manualCard")
         .classList
         .remove("hidden");
 
-
     document
-        .getElementById(
-            "manualTitle"
-        )
+        .getElementById("manualTitle")
         .innerText =
             getItemScanTitle();
 
-
     const input =
-        document.getElementById(
-            "manualInput"
-        );
-
+        document.getElementById("manualInput");
 
     input.value = "";
 
     input.placeholder =
         "Enter Item Barcode";
 
-
     input.focus();
-
 }
 
 
@@ -1459,10 +453,15 @@ function manualItem() {
 
 function lookupItem(itemBarcode) {
 
-    showLoading(
-        "Finding item..."
-    );
+    showLoading("Finding item...");
 
+    const cleanBarcode =
+        String(itemBarcode).trim();
+
+    console.log(
+        "Looking up item barcode:",
+        cleanBarcode
+    );
 
     postData({
 
@@ -1472,30 +471,73 @@ function lookupItem(itemBarcode) {
             currentStudent.id,
 
         itemBarcode:
-            itemBarcode
+            cleanBarcode
 
     })
 
-    .then(function(result) {
+    .then(function (result) {
+
+        console.log(
+            "lookupItem response:",
+            result
+        );
 
         if (!result.success) {
 
             showError(
-                result.message
+                result.message ||
+                "Item could not be found."
             );
 
             return;
-
         }
 
+        if (
+            !result.data ||
+            !result.data.item
+        ) {
+
+            showError(
+                "The Supply server found the item, " +
+                "but returned incomplete item information."
+            );
+
+            return;
+        }
 
         const item =
             result.data.item;
 
-
         /*
-         * EXCHANGE
+         * =====================================================
+         * IMPORTANT
+         *
+         * Normalize the barcode property.
+         *
+         * Depending on the Apps Script response, the property
+         * may be called itemBarcode or barcode.
+         * =====================================================
          */
+
+        item.barcode =
+            item.itemBarcode ||
+            item.barcode ||
+            cleanBarcode;
+
+        item.itemBarcode =
+            item.itemBarcode ||
+            item.barcode ||
+            cleanBarcode;
+
+        console.log(
+            "Normalized item:",
+            item
+        );
+
+
+        /* =====================================================
+           EXCHANGE
+           ===================================================== */
 
         if (
             currentMode === "exchange" &&
@@ -1507,13 +549,12 @@ function lookupItem(itemBarcode) {
             showExchangeConfirmation();
 
             return;
-
         }
 
 
-        /*
-         * EXCHANGE FIRST ITEM
-         */
+        /* =====================================================
+           EXCHANGE FIRST ITEM
+           ===================================================== */
 
         if (
             currentMode === "exchange"
@@ -1524,13 +565,12 @@ function lookupItem(itemBarcode) {
             showOldItem();
 
             return;
-
         }
 
 
-        /*
-         * NORMAL ISSUE / RETURN
-         */
+        /* =====================================================
+           NORMAL ISSUE / RETURN
+           ===================================================== */
 
         currentItem = item;
 
@@ -1538,16 +578,19 @@ function lookupItem(itemBarcode) {
 
     })
 
-    .catch(function(error) {
+    .catch(function (error) {
 
-        showError(
-            "Could not contact Supply server."
+        console.error(
+            "lookupItem error:",
+            error
         );
 
-        console.error(error);
+        showError(
+            "Could not contact Supply server.\n\n" +
+            error.message
+        );
 
     });
-
 }
 
 
@@ -1559,15 +602,10 @@ function showItemConfirmation() {
 
     hideAllCards();
 
-
     const card =
-        document.getElementById(
-            "itemCard"
-        );
-
+        document.getElementById("itemCard");
 
     let title = "Item";
-
 
     if (currentMode === "issue") {
 
@@ -1582,40 +620,28 @@ function showItemConfirmation() {
 
         title =
             "Confirm Return";
-
     }
 
-
     document
-        .getElementById(
-            "itemActionTitle"
-        )
+        .getElementById("itemActionTitle")
         .innerText = title;
 
-
     document
-        .getElementById(
-            "itemName"
-        )
+        .getElementById("itemName")
         .innerText =
             currentItem.itemName +
             " — " +
             currentItem.size;
 
-
     document
-        .getElementById(
-            "itemDetails"
-        )
+        .getElementById("itemDetails")
         .innerText =
             "Item Code: " +
             currentItem.itemCode +
             " | Category: " +
             currentItem.category;
 
-
     card.classList.remove("hidden");
-
 }
 
 
@@ -1627,33 +653,23 @@ function showOldItem() {
 
     hideAllCards();
 
-
     document
-        .getElementById(
-            "oldItemName"
-        )
+        .getElementById("oldItemName")
         .innerText =
             oldItem.itemName +
             " — " +
             oldItem.size;
 
-
     document
-        .getElementById(
-            "oldItemDetails"
-        )
+        .getElementById("oldItemDetails")
         .innerText =
             "Item Code: " +
             oldItem.itemCode;
 
-
     document
-        .getElementById(
-            "exchangeOldItemCard"
-        )
+        .getElementById("exchangeOldItemCard")
         .classList
         .remove("hidden");
-
 }
 
 
@@ -1661,34 +677,24 @@ function showExchangeConfirmation() {
 
     hideAllCards();
 
-
     document
-        .getElementById(
-            "exchangeOldDisplay"
-        )
+        .getElementById("exchangeOldDisplay")
         .innerText =
             oldItem.itemName +
             " — " +
             oldItem.size;
 
-
     document
-        .getElementById(
-            "exchangeNewDisplay"
-        )
+        .getElementById("exchangeNewDisplay")
         .innerText =
             newItem.itemName +
             " — " +
             newItem.size;
 
-
     document
-        .getElementById(
-            "exchangeConfirmCard"
-        )
+        .getElementById("exchangeConfirmCard")
         .classList
         .remove("hidden");
-
 }
 
 
@@ -1703,18 +709,14 @@ function confirmPrimaryAction() {
         issueItem(false);
 
         return;
-
     }
-
 
     if (currentMode === "return") {
 
         returnItem(false);
 
         return;
-
     }
-
 }
 
 
@@ -1724,20 +726,63 @@ function confirmPrimaryAction() {
 
 function issueItem(force) {
 
-    showLoading(
-        "Processing issue..."
-    );
+    if (!currentStudent) {
+
+        showError(
+            "No student is selected."
+        );
+
+        return;
+    }
+
+    if (!currentItem) {
+
+        showError(
+            "No item is selected."
+        );
+
+        return;
+    }
 
 
-    postData({
+    /*
+     * =====================================================
+     * FIX:
+     *
+     * Use itemBarcode first.
+     * Fall back to barcode.
+     * =====================================================
+     */
+
+    const barcode =
+        currentItem.itemBarcode ||
+        currentItem.barcode;
+
+
+    if (!barcode) {
+
+        console.error(
+            "Invalid currentItem:",
+            currentItem
+        );
+
+        showError(
+            "The selected item does not have a barcode."
+        );
+
+        return;
+    }
+
+
+    const payload = {
 
         action: "issue",
 
         studentId:
-            currentStudent.id,
+            String(currentStudent.id),
 
         itemBarcode:
-            currentItem.barcode,
+            String(barcode),
 
         clerk:
             saveClerk(),
@@ -1745,9 +790,29 @@ function issueItem(force) {
         force:
             force === true
 
-    })
+    };
 
-    .then(function(result) {
+
+    console.log(
+        "ISSUE PAYLOAD:",
+        payload
+    );
+
+
+    showLoading(
+        "Processing issue..."
+    );
+
+
+    postData(payload)
+
+    .then(function (result) {
+
+        console.log(
+            "ISSUE RESPONSE:",
+            result
+        );
+
 
         if (
             !result.success &&
@@ -1756,61 +821,86 @@ function issueItem(force) {
         ) {
 
             showDuplicateWarning(
+
                 result.message,
-                function() {
+
+                function () {
                     issueItem(true);
                 }
+
             );
 
             return;
-
         }
 
 
         if (!result.success) {
 
             showError(
-                result.message
+                result.message ||
+                "The issue could not be completed."
             );
 
             return;
-
         }
+
+
+        let itemText =
+            currentItem.itemName || "Item";
+
+
+        if (currentItem.size) {
+
+            itemText +=
+                " — " +
+                currentItem.size;
+        }
+
+
+        let transactionId =
+            result.data &&
+            result.data.transactionId
+                ? result.data.transactionId
+                : "Recorded";
 
 
         showSuccess(
 
             "✓ Item Issued",
 
-            result.message +
+            (result.message ||
+                "Item issued successfully.") +
 
             "<br><br>" +
 
             "<strong>" +
-            result.data.item.itemName +
-            " — " +
-            result.data.item.size +
+            escapeHtml(itemText) +
             "</strong>" +
 
             "<br><br>" +
 
             "Transaction: " +
-            result.data.transactionId
+            escapeHtml(transactionId)
 
         );
 
     })
 
-    .catch(function(error) {
+    .catch(function (error) {
 
-        showError(
-            "Issue failed."
+        console.error(
+            "ISSUE ERROR:",
+            error
         );
 
-        console.error(error);
+        showError(
+
+            "Issue failed.\n\n" +
+            error.message
+
+        );
 
     });
-
 }
 
 
@@ -1820,20 +910,54 @@ function issueItem(force) {
 
 function returnItem(force) {
 
-    showLoading(
-        "Processing return..."
-    );
+    if (!currentStudent) {
+
+        showError(
+            "No student is selected."
+        );
+
+        return;
+    }
+
+    if (!currentItem) {
+
+        showError(
+            "No item is selected."
+        );
+
+        return;
+    }
 
 
-    postData({
+    const barcode =
+        currentItem.itemBarcode ||
+        currentItem.barcode;
+
+
+    if (!barcode) {
+
+        console.error(
+            "Invalid currentItem:",
+            currentItem
+        );
+
+        showError(
+            "The selected item does not have a barcode."
+        );
+
+        return;
+    }
+
+
+    const payload = {
 
         action: "return",
 
         studentId:
-            currentStudent.id,
+            String(currentStudent.id),
 
         itemBarcode:
-            currentItem.barcode,
+            String(barcode),
 
         clerk:
             saveClerk(),
@@ -1841,9 +965,29 @@ function returnItem(force) {
         force:
             force === true
 
-    })
+    };
 
-    .then(function(result) {
+
+    console.log(
+        "RETURN PAYLOAD:",
+        payload
+    );
+
+
+    showLoading(
+        "Processing return..."
+    );
+
+
+    postData(payload)
+
+    .then(function (result) {
+
+        console.log(
+            "RETURN RESPONSE:",
+            result
+        );
+
 
         if (
             !result.success &&
@@ -1852,61 +996,86 @@ function returnItem(force) {
         ) {
 
             showReturnWarning(
+
                 result.message,
-                function() {
+
+                function () {
                     returnItem(true);
                 }
+
             );
 
             return;
-
         }
 
 
         if (!result.success) {
 
             showError(
-                result.message
+                result.message ||
+                "The return could not be completed."
             );
 
             return;
-
         }
+
+
+        let itemText =
+            currentItem.itemName || "Item";
+
+
+        if (currentItem.size) {
+
+            itemText +=
+                " — " +
+                currentItem.size;
+        }
+
+
+        let transactionId =
+            result.data &&
+            result.data.transactionId
+                ? result.data.transactionId
+                : "Recorded";
 
 
         showSuccess(
 
             "✓ Item Returned",
 
-            result.message +
+            (result.message ||
+                "Item returned successfully.") +
 
             "<br><br>" +
 
             "<strong>" +
-            result.data.item.itemName +
-            " — " +
-            result.data.item.size +
+            escapeHtml(itemText) +
             "</strong>" +
 
             "<br><br>" +
 
             "Transaction: " +
-            result.data.transactionId
+            escapeHtml(transactionId)
 
         );
 
     })
 
-    .catch(function(error) {
+    .catch(function (error) {
 
-        showError(
-            "Return failed."
+        console.error(
+            "RETURN ERROR:",
+            error
         );
 
-        console.error(error);
+        showError(
+
+            "Return failed.\n\n" +
+            error.message
+
+        );
 
     });
-
 }
 
 
@@ -1917,29 +1086,70 @@ function returnItem(force) {
 function confirmExchange() {
 
     exchangeItems(false);
-
 }
 
 
 function exchangeItems(force) {
 
-    showLoading(
-        "Processing exchange..."
-    );
+    if (!currentStudent) {
+
+        showError(
+            "No student is selected."
+        );
+
+        return;
+    }
+
+    if (!oldItem || !newItem) {
+
+        showError(
+            "Both the old and new items are required."
+        );
+
+        return;
+    }
 
 
-    postData({
+    const oldBarcode =
+        oldItem.itemBarcode ||
+        oldItem.barcode;
+
+
+    const newBarcode =
+        newItem.itemBarcode ||
+        newItem.barcode;
+
+
+    if (!oldBarcode || !newBarcode) {
+
+        console.error(
+            "Invalid exchange items:",
+            {
+                oldItem: oldItem,
+                newItem: newItem
+            }
+        );
+
+        showError(
+            "One of the exchange items does not have a barcode."
+        );
+
+        return;
+    }
+
+
+    const payload = {
 
         action: "exchange",
 
         studentId:
-            currentStudent.id,
+            String(currentStudent.id),
 
         oldItemBarcode:
-            oldItem.barcode,
+            String(oldBarcode),
 
         newItemBarcode:
-            newItem.barcode,
+            String(newBarcode),
 
         clerk:
             saveClerk(),
@@ -1947,9 +1157,29 @@ function exchangeItems(force) {
         force:
             force === true
 
-    })
+    };
 
-    .then(function(result) {
+
+    console.log(
+        "EXCHANGE PAYLOAD:",
+        payload
+    );
+
+
+    showLoading(
+        "Processing exchange..."
+    );
+
+
+    postData(payload)
+
+    .then(function (result) {
+
+        console.log(
+            "EXCHANGE RESPONSE:",
+            result
+        );
+
 
         if (
             !result.success &&
@@ -1958,26 +1188,60 @@ function exchangeItems(force) {
         ) {
 
             showDuplicateWarning(
+
                 result.message,
-                function() {
+
+                function () {
                     exchangeItems(true);
                 }
+
             );
 
             return;
-
         }
 
 
         if (!result.success) {
 
             showError(
-                result.message
+                result.message ||
+                "The exchange could not be completed."
             );
 
             return;
-
         }
+
+
+        const oldName =
+            result.data &&
+            result.data.oldItem
+                ? result.data.oldItem.itemName +
+                  " — " +
+                  result.data.oldItem.size
+                : "Old Item";
+
+
+        const newName =
+            result.data &&
+            result.data.newItem
+                ? result.data.newItem.itemName +
+                  " — " +
+                  result.data.newItem.size
+                : "New Item";
+
+
+        const returnTransaction =
+            result.data &&
+            result.data.returnTransactionId
+                ? result.data.returnTransactionId
+                : "Recorded";
+
+
+        const issueTransaction =
+            result.data &&
+            result.data.issueTransactionId
+                ? result.data.issueTransactionId
+                : "Recorded";
 
 
         showSuccess(
@@ -1987,9 +1251,7 @@ function exchangeItems(force) {
             "Returned:<br>" +
 
             "<strong>" +
-            result.data.oldItem.itemName +
-            " — " +
-            result.data.oldItem.size +
+            escapeHtml(oldName) +
             "</strong>" +
 
             "<br><br>" +
@@ -1997,35 +1259,38 @@ function exchangeItems(force) {
             "Issued:<br>" +
 
             "<strong>" +
-            result.data.newItem.itemName +
-            " — " +
-            result.data.newItem.size +
+            escapeHtml(newName) +
             "</strong>" +
 
             "<br><br>" +
 
             "Return Transaction: " +
-            result.data.returnTransactionId +
+            escapeHtml(returnTransaction) +
 
             "<br>" +
 
             "Issue Transaction: " +
-            result.data.issueTransactionId
+            escapeHtml(issueTransaction)
 
         );
 
     })
 
-    .catch(function(error) {
+    .catch(function (error) {
 
-        showError(
-            "Exchange failed."
+        console.error(
+            "EXCHANGE ERROR:",
+            error
         );
 
-        console.error(error);
+        showError(
+
+            "Exchange failed.\n\n" +
+            error.message
+
+        );
 
     });
-
 }
 
 
@@ -2049,7 +1314,13 @@ function loadCadet() {
 
     })
 
-    .then(function(result) {
+    .then(function (result) {
+
+        console.log(
+            "viewCadet response:",
+            result
+        );
+
 
         if (!result.success) {
 
@@ -2058,7 +1329,6 @@ function loadCadet() {
             );
 
             return;
-
         }
 
 
@@ -2067,9 +1337,7 @@ function loadCadet() {
 
 
         document
-            .getElementById(
-                "cadetName"
-            )
+            .getElementById("cadetName")
             .innerText =
                 student.firstName +
                 " " +
@@ -2077,9 +1345,7 @@ function loadCadet() {
 
 
         document
-            .getElementById(
-                "cadetDetails"
-            )
+            .getElementById("cadetDetails")
             .innerText =
                 formatStudentDetails();
 
@@ -2098,24 +1364,25 @@ function loadCadet() {
 
 
         document
-            .getElementById(
-                "cadetCard"
-            )
+            .getElementById("cadetCard")
             .classList
             .remove("hidden");
 
     })
 
-    .catch(function(error) {
+    .catch(function (error) {
 
-        showError(
-            "Could not load cadet information."
+        console.error(
+            "viewCadet error:",
+            error
         );
 
-        console.error(error);
+        showError(
+            "Could not load cadet information.\n\n" +
+            error.message
+        );
 
     });
-
 }
 
 
@@ -2127,19 +1394,20 @@ function displayCurrentItems(items) {
         );
 
 
-    if (!items ||
-        items.length === 0) {
+    if (
+        !items ||
+        items.length === 0
+    ) {
 
         container.innerHTML =
             "<p>No items are currently recorded as issued.</p>";
 
         return;
-
     }
 
 
     container.innerHTML =
-        items.map(function(item) {
+        items.map(function (item) {
 
             return `
 
@@ -2158,7 +1426,11 @@ function displayCurrentItems(items) {
 
                     <span>
                         Barcode:
-                        ${escapeHtml(item.itemBarcode)}
+                        ${escapeHtml(
+                            item.itemBarcode ||
+                            item.barcode ||
+                            ""
+                        )}
                     </span>
 
                 </div>
@@ -2166,7 +1438,6 @@ function displayCurrentItems(items) {
             `;
 
         }).join("");
-
 }
 
 
@@ -2178,19 +1449,20 @@ function displayHistory(history) {
         );
 
 
-    if (!history ||
-        history.length === 0) {
+    if (
+        !history ||
+        history.length === 0
+    ) {
 
         container.innerHTML =
             "<p>No transaction history.</p>";
 
         return;
-
     }
 
 
     container.innerHTML =
-        history.map(function(txn) {
+        history.map(function (txn) {
 
             const actionClass =
                 "action-" +
@@ -2241,7 +1513,6 @@ function displayHistory(history) {
             `;
 
         }).join("");
-
 }
 
 
@@ -2255,24 +1526,19 @@ function showScanner(title) {
 
 
     document
-        .getElementById(
-            "scannerCard"
-        )
+        .getElementById("scannerCard")
         .classList
         .remove("hidden");
 
 
     document
-        .getElementById(
-            "scannerTitle"
-        )
-        .innerText = title;
+        .getElementById("scannerTitle")
+        .innerText =
+            title;
 
 
     scanner =
-        new Html5Qrcode(
-            "reader"
-        );
+        new Html5Qrcode("reader");
 
 
     scanner.start(
@@ -2292,7 +1558,7 @@ function showScanner(title) {
 
         },
 
-        function(decodedText) {
+        function (decodedText) {
 
             stopScanner();
 
@@ -2302,7 +1568,7 @@ function showScanner(title) {
 
         },
 
-        function(errorMessage) {
+        function (errorMessage) {
 
             // Continuous scanner errors
             // are intentionally ignored.
@@ -2310,17 +1576,20 @@ function showScanner(title) {
         }
 
     )
-    .catch(function(error) {
+
+    .catch(function (error) {
 
         showError(
+
             "Camera could not start. " +
-            "Make sure the browser has permission to use the camera."
+            "Make sure the browser has permission " +
+            "to use the camera."
+
         );
 
         console.error(error);
 
     });
-
 }
 
 
@@ -2329,19 +1598,18 @@ function stopScanner() {
     if (!scanner) {
 
         return;
-
     }
 
 
     scanner.stop()
 
-        .then(function() {
+        .then(function () {
 
             scanner.clear();
 
         })
 
-        .catch(function() {
+        .catch(function () {
 
             try {
                 scanner.clear();
@@ -2355,20 +1623,16 @@ function stopScanner() {
 
 
     document
-        .getElementById(
-            "scannerCard"
-        )
+        .getElementById("scannerCard")
         .classList
         .add("hidden");
-
 }
 
 
 function handleBarcode(barcode) {
 
     barcode =
-        String(barcode)
-        .trim();
+        String(barcode).trim();
 
 
     if (!barcode) {
@@ -2378,7 +1642,6 @@ function handleBarcode(barcode) {
         );
 
         return;
-
     }
 
 
@@ -2387,7 +1650,6 @@ function handleBarcode(barcode) {
         lookupStudent(barcode);
 
         return;
-
     }
 
 
@@ -2396,9 +1658,7 @@ function handleBarcode(barcode) {
         lookupItem(barcode);
 
         return;
-
     }
-
 }
 
 
@@ -2427,7 +1687,6 @@ function submitManualEntry() {
         input.focus();
 
         return;
-
     }
 
 
@@ -2436,11 +1695,6 @@ function submitManualEntry() {
         currentMode === "return" ||
         currentMode === "exchange"
     ) {
-
-        /*
-         * If we don't have a student yet,
-         * this is a student ID.
-         */
 
         if (!currentStudent) {
 
@@ -2455,7 +1709,6 @@ function submitManualEntry() {
         }
 
         return;
-
     }
 
 
@@ -2464,9 +1717,7 @@ function submitManualEntry() {
         lookupStudent(value);
 
         return;
-
     }
-
 }
 
 
@@ -2493,7 +1744,7 @@ function hideAllCards() {
     ];
 
 
-    ids.forEach(function(id) {
+    ids.forEach(function (id) {
 
         const element =
             document.getElementById(id);
@@ -2508,7 +1759,6 @@ function hideAllCards() {
         }
 
     });
-
 }
 
 
@@ -2518,38 +1768,30 @@ function showLoading(message) {
 
 
     document
-        .getElementById(
-            "statusCard"
-        )
+        .getElementById("statusCard")
         .classList
         .remove("hidden");
 
 
     document
-        .getElementById(
-            "statusTitle"
-        )
+        .getElementById("statusTitle")
         .innerText =
             "Please Wait";
 
 
     document
-        .getElementById(
-            "statusMessage"
-        )
+        .getElementById("statusMessage")
         .className =
             "status";
 
 
     document
-        .getElementById(
-            "statusMessage"
-        )
+        .getElementById("statusMessage")
         .innerHTML =
+
             `<div class="loading">
                 ${escapeHtml(message)}
              </div>`;
-
 }
 
 
@@ -2562,36 +1804,27 @@ function showSuccess(
 
 
     document
-        .getElementById(
-            "statusCard"
-        )
+        .getElementById("statusCard")
         .classList
         .remove("hidden");
 
 
     document
-        .getElementById(
-            "statusTitle"
-        )
+        .getElementById("statusTitle")
         .innerText =
             title;
 
 
     document
-        .getElementById(
-            "statusMessage"
-        )
+        .getElementById("statusMessage")
         .className =
             "status success";
 
 
     document
-        .getElementById(
-            "statusMessage"
-        )
+        .getElementById("statusMessage")
         .innerHTML =
             message;
-
 }
 
 
@@ -2601,36 +1834,27 @@ function showError(message) {
 
 
     document
-        .getElementById(
-            "statusCard"
-        )
+        .getElementById("statusCard")
         .classList
         .remove("hidden");
 
 
     document
-        .getElementById(
-            "statusTitle"
-        )
+        .getElementById("statusTitle")
         .innerText =
             "⚠ Error";
 
 
     document
-        .getElementById(
-            "statusMessage"
-        )
+        .getElementById("statusMessage")
         .className =
             "status error";
 
 
     document
-        .getElementById(
-            "statusMessage"
-        )
+        .getElementById("statusMessage")
         .innerText =
             message;
-
 }
 
 
@@ -2654,25 +1878,19 @@ function showDuplicateWarning(
 
 
     document
-        .getElementById(
-            "statusTitle"
-        )
+        .getElementById("statusTitle")
         .innerText =
             "⚠ Duplicate / Conflict";
 
 
     document
-        .getElementById(
-            "statusMessage"
-        )
+        .getElementById("statusMessage")
         .className =
             "status warning";
 
 
     document
-        .getElementById(
-            "statusMessage"
-        )
+        .getElementById("statusMessage")
         .innerText =
             message;
 
@@ -2721,7 +1939,6 @@ function showDuplicateWarning(
     card.appendChild(
         cancel
     );
-
 }
 
 
@@ -2734,7 +1951,6 @@ function showReturnWarning(
         message,
         confirmFunction
     );
-
 }
 
 
@@ -2743,6 +1959,24 @@ function showReturnWarning(
    ========================================================= */
 
 function postData(data) {
+
+    console.log(
+        "API REQUEST:",
+        data
+    );
+
+
+    const controller =
+        new AbortController();
+
+
+    const timeout =
+        setTimeout(function () {
+
+            controller.abort();
+
+        }, 20000);
+
 
     return fetch(
 
@@ -2761,13 +1995,25 @@ function postData(data) {
             },
 
             body:
-                JSON.stringify(data)
+                JSON.stringify(data),
+
+            signal:
+                controller.signal
 
         }
 
     )
 
-    .then(function(response) {
+    .then(function (response) {
+
+        clearTimeout(timeout);
+
+
+        console.log(
+            "API HTTP STATUS:",
+            response.status
+        );
+
 
         if (!response.ok) {
 
@@ -2775,14 +2021,80 @@ function postData(data) {
                 "HTTP " +
                 response.status
             );
-
         }
 
 
-        return response.json();
+        return response.text();
+
+    })
+
+    .then(function (text) {
+
+        console.log(
+            "API RAW RESPONSE:",
+            text
+        );
+
+
+        if (!text) {
+
+            throw new Error(
+                "The Supply server returned an empty response."
+            );
+        }
+
+
+        let result;
+
+
+        try {
+
+            result =
+                JSON.parse(text);
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Invalid JSON response:",
+                text
+            );
+
+            throw new Error(
+                "The Supply server returned invalid data."
+            );
+        }
+
+
+        console.log(
+            "API PARSED RESPONSE:",
+            result
+        );
+
+
+        return result;
+
+    })
+
+    .catch(function (error) {
+
+        clearTimeout(timeout);
+
+
+        if (
+            error.name === "AbortError"
+        ) {
+
+            throw new Error(
+                "The Supply server did not respond within 20 seconds."
+            );
+        }
+
+
+        throw error;
 
     });
-
 }
 
 
@@ -2808,12 +2120,7 @@ function resetApp() {
     scannerMode = null;
 
 
-    /*
-     * Restore original home menu.
-     */
-
     location.reload();
-
 }
 
 
@@ -2849,13 +2156,6 @@ function escapeHtml(value) {
             /'/g,
             "&#039;"
         );
-
 }
 
-
 </script>
-
-
-</body>
-
-</html>
