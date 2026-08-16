@@ -9,7 +9,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
-<title>NJROTC Supply Database</title>
+<title>NJROTC Supply Prototype</title>
 
 <script src="https://unpkg.com/html5-qrcode"
         type="text/javascript"></script>
@@ -123,7 +123,7 @@ input {
 
         <h1>PVHS NJROTC</h1>
 
-        <div>SUPPLY DATABASE</div>
+        <div>SUPPLY PROTOTYPE</div>
 
     </div>
 
@@ -288,6 +288,12 @@ input {
 
         <h2>Inventory</h2>
 
+        <input
+            type="text"
+            id="inventorySearch"
+            placeholder="Search by Item Code"
+            oninput="filterInventory()">
+
         <div id="inventoryItems"></div>
 
         <button
@@ -353,6 +359,8 @@ let currentItem = null;
 let scanner = null;
 
 let scannerMode = null;
+
+let inventoryData = [];
 
 
 
@@ -998,6 +1006,10 @@ function lookupInventory() {
         }
 
 
+        inventoryData =
+            result.data.inventory;
+
+
         document
             .getElementById("home")
             .classList
@@ -1010,40 +1022,91 @@ function lookupInventory() {
             .remove("hidden");
 
 
-        const container =
-            document.getElementById("inventoryItems");
+        document
+            .getElementById("inventorySearch")
+            .value = "";
 
 
-        container.innerHTML = "";
+        displayInventory(
+            inventoryData
+        );
+
+    });
+
+}
 
 
-        result.data.inventory.forEach(item => {
 
-            const div =
-                document.createElement("div");
+function filterInventory() {
 
-            div.className =
-                "inventory-row";
-
-
-            div.innerText =
-                item.itemName +
-                " — " +
-                item.size +
-                "\n\n" +
-                "Total: " +
-                item.total +
-                "\n" +
-                "Issued: " +
-                item.issued +
-                "\n" +
-                "In Stock: " +
-                item.stock;
+    const search =
+        document
+            .getElementById("inventorySearch")
+            .value
+            .toLowerCase()
+            .trim();
 
 
-            container.appendChild(div);
+    const filtered =
+        inventoryData.filter(item =>
+            String(item.itemCode)
+                .toLowerCase()
+                .includes(search)
+        );
 
-        });
+
+    displayInventory(filtered);
+
+}
+
+
+
+function displayInventory(items) {
+
+    const container =
+        document.getElementById("inventoryItems");
+
+
+    container.innerHTML = "";
+
+
+    if (items.length === 0) {
+
+        container.innerText =
+            "No inventory items found.";
+
+        return;
+
+    }
+
+
+    items.forEach(item => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "inventory-row";
+
+
+        div.innerText =
+            item.itemCode +
+            "\n" +
+            item.itemName +
+            " — " +
+            item.size +
+            "\n\n" +
+            "Total: " +
+            item.total +
+            "\n" +
+            "Issued: " +
+            item.issued +
+            "\n" +
+            "In Stock: " +
+            item.stock;
+
+
+        container.appendChild(div);
 
     });
 
@@ -1102,6 +1165,8 @@ function resetApp() {
     currentItem = null;
 
     scannerMode = null;
+
+    inventoryData = [];
 
 
     document
